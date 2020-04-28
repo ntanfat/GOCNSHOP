@@ -622,7 +622,7 @@ NHToolbar.prototype.getItemInfoHTML = function(item) {
 
     var html =
         '<div class="nhtq-item-info">' +
-        '<div class="nhtq-box-title">Nhaphangtrungquoc.vn</div>' +
+        '<div class="nhtq-box-title">F4T_taobao</div>' +
             htmlPriceRange + // Khoảng giá nếu có
         '<div class="nhtq-item-detail" style="padding:10px;">' +
         '<table border="1" class="nhtq-table-item-detail">' +
