@@ -13,4 +13,4 @@ _nhJsElement.src = _nhDomain+'js/toolbar/toolbar.js?v=' + _nhCurrentTime;
 document.body.appendChild(_nhCssElement);
 document.body.appendChild(_nhJsElement);
 
-//test6
+//test7
