@@ -1255,8 +1255,10 @@ NHToolbar.prototype.addToCart = function () {
         //    }
         //});
 
-        HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng.' +
-            '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>.',
+
+        console.log(data);
+        HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
+            '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
             { parent: '#nhtqOrderMsg', type: 'success' });
 
     } else {

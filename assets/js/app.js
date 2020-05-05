@@ -1,5 +1,6 @@
-var timestamp = new Date().getTime();
+var url = 'https://rawcdn.githack.com/ntanfat/taobao/7445494fdf2c60a91d6adc81961e164befd876e4/assets/js/content.js';
+var version = '?v=' + new Date().getTime();
 var js = document.createElement('script');
 js.type = 'text/javascript';
-js.src = 'https://rawcdn.githack.com/ntanfat/taobao/c9a08ee4b4af7d41f9e95eb2e6223386417e01b1/assets/js/content.js' + '?v=' + timestamp;
+js.src = url + version;
 document.body.appendChild(js);
