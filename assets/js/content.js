@@ -1,15 +1,15 @@
 var nhtqConfig = {
-    apiDomain : '//nhaphangtrungquoc.vn/'
+    apiDomain: '//nhaphangtrungquoc.vn/'
 };
 
 var HTMLUtil = {
-    hideElement: function(selector) {
+    hideElement: function (selector) {
         var element = this.select(selector);
         if (element != null && typeof element !== 'undefined' && typeof element.style !== 'undefined') {
             element.style.display = 'none';
         }
     },
-    select: function(selector, element) {
+    select: function (selector, element) {
         if (typeof selector !== 'string') {
             return null;
         }
@@ -18,16 +18,16 @@ var HTMLUtil = {
         }
         return element.querySelector(selector);
     },
-    selectAll: function(selector, element) {
+    selectAll: function (selector, element) {
         if (typeof element === 'undefined' || !element) {
             return document.querySelectorAll(selector);
         }
         return element.querySelectorAll(selector);
     },
-    formatMoney: function(input) {
+    formatMoney: function (input) {
         return input.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.");
     },
-    each: function(elements, callback) {
+    each: function (elements, callback) {
         for (var i in elements) {
             if (typeof elements[i] === 'object') {
                 callback(elements[i]);
@@ -36,7 +36,7 @@ var HTMLUtil = {
     },
     serialize: function (obj, prefix) {
         var str = [], p;
-        for(p in obj) {
+        for (p in obj) {
             if (obj.hasOwnProperty(p)) {
                 var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
                 str.push((v !== null && typeof v === "object") ?
@@ -46,10 +46,10 @@ var HTMLUtil = {
         }
         return str.join("&");
     },
-    get: function(url, callback) {
+    get: function (url, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("GET", url, true);
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4
                 && xhr.status === 200) {
                 callback && callback(xhr.response);
@@ -59,11 +59,11 @@ var HTMLUtil = {
         xhr.withCredentials = true;
         xhr.send();
     },
-    post: function(url, data, callback) {
+    post: function (url, data, callback) {
         var xhr = new XMLHttpRequest();
         xhr.open("POST", url, true);
         xhr.responseType = 'json';
-        xhr.onreadystatechange = function() {
+        xhr.onreadystatechange = function () {
             if (xhr.readyState === 4
                 && xhr.status === 200) {
                 callback && callback(xhr.response);
@@ -78,7 +78,7 @@ var HTMLUtil = {
             xhr.send();
         }
     },
-    fullHeight: function(element) {
+    fullHeight: function (element) {
         var e = null;
         if (typeof element === 'string') {
             e = HTMLUtil.select(element);
@@ -87,36 +87,36 @@ var HTMLUtil = {
         }
         if (e !== null) {
             e.style.height = window.innerHeight + 'px';
-            HTMLUtil.addEvent(window, "resize", function(event) {
+            HTMLUtil.addEvent(window, "resize", function (event) {
                 e.style.height = window.innerHeight + 'px';
             });
         }
     },
-    addEvent: function(object, type, callback) {
-        if (object === null || typeof(object) === 'undefined') return;
+    addEvent: function (object, type, callback) {
+        if (object === null || typeof (object) === 'undefined') return;
         if (object.addEventListener) {
             object.addEventListener(type, callback, false);
         } else if (object.attachEvent) {
             object.attachEvent("on" + type, callback);
         } else {
-            object["on"+type] = callback;
+            object["on" + type] = callback;
         }
     },
-    getSearchUrl: function(website, keyword) {
+    getSearchUrl: function (website, keyword) {
         var url = "";
-        switch(website) {
+        switch (website) {
             case "taobao.com":
             case "taobao":
-                url = 'http://s.taobao.com/search?q='+keyword;
+                url = 'http://s.taobao.com/search?q=' + keyword;
                 break;
             case "tmall.com":
             case "tmall.hk":
             case "tmall":
-                url = 'http://list.tmall.com/search_product.htm?q='+keyword;
+                url = 'http://list.tmall.com/search_product.htm?q=' + keyword;
                 break;
             case "1688.com":
             case "1688":
-                url = 'http://s.1688.com/selloffer/offer_search.htm?keywords='+keyword;
+                url = 'http://s.1688.com/selloffer/offer_search.htm?keywords=' + keyword;
                 break;
             default:
                 return null;
@@ -124,21 +124,21 @@ var HTMLUtil = {
         }
         return url;
     },
-    getItemUrl: function(website, itemId) {
+    getItemUrl: function (website, itemId) {
         var url = "";
-        switch(website) {
+        switch (website) {
             case "taobao.com":
             case "taobao":
-                url = 'https://item.taobao.com/item.htm?id='+itemId;
+                url = 'https://item.taobao.com/item.htm?id=' + itemId;
                 break;
             case "tmall.com":
             case "tmall.hk":
             case "tmall":
-                url = 'https://detail.tmall.com/item.htm?id='+itemId;
+                url = 'https://detail.tmall.com/item.htm?id=' + itemId;
                 break;
             case "1688.com":
             case "1688":
-                url = 'https://detail.1688.com/offer/'+itemId+'.html';
+                url = 'https://detail.1688.com/offer/' + itemId + '.html';
                 break;
             default:
                 return null;
@@ -146,7 +146,7 @@ var HTMLUtil = {
         }
         return url;
     },
-    alert: function(msg, options) {
+    alert: function (msg, options) {
         var type = 'alert';
         var parent = 'body';
         if (typeof options !== 'undefined' && options !== null) {
@@ -158,21 +158,21 @@ var HTMLUtil = {
                 parent = options.parent;
             }
         }
-        var html = '<div class="nhtqAlert nhtqAlert-'+type+'">' +
+        var html = '<div class="nhtqAlert nhtqAlert-' + type + '">' +
             '<div class="nhtqAlertContent">' +
-                    '<div class="nhtqAlertMessage">' +
-                        msg +
-                    '</div>' +
-                    '<button type="button" class="nhtqAlertClose" data-dismiss="alert" aria-label="Close">' +
-                        '<span aria-hidden="true">\u00d7</span>' +
-                    '</button>' +
-                '</div>' +
+            '<div class="nhtqAlertMessage">' +
+            msg +
+            '</div>' +
+            '<button type="button" class="nhtqAlertClose" data-dismiss="alert" aria-label="Close">' +
+            '<span aria-hidden="true">\u00d7</span>' +
+            '</button>' +
+            '</div>' +
             '</div>';
         var p = HTMLUtil.select(parent);
         // Đóng tất cả alert trong parent
         var olds = HTMLUtil.selectAll('.nhtqAlertWrap', p);
         if (olds.length > 0) {
-            for(var i = 0; i < olds.length; i++) {
+            for (var i = 0; i < olds.length; i++) {
                 olds[i].parentNode.removeChild(olds[i]);
             }
         }
@@ -180,7 +180,7 @@ var HTMLUtil = {
             var e = document.createElement('div');
             e.classList.add('nhtqAlertWrap');
             e.innerHTML = html;
-            HTMLUtil.select('.nhtqAlertClose', e).onclick = function() {
+            HTMLUtil.select('.nhtqAlertClose', e).onclick = function () {
                 e.parentNode.removeChild(e);
             };
             p.appendChild(e);
@@ -188,11 +188,10 @@ var HTMLUtil = {
     }
 }
 
-function NHToolbar()
-{
+function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.post(nhtqConfig.apiDomain + "config/index", null, function(res) {
+    HTMLUtil.post(nhtqConfig.apiDomain + "config/index", null, function (res) {
         instance.config = res;
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
@@ -214,15 +213,14 @@ NHToolbar.prototype.itemDetailPatterns = [
     'taiwan.tmall.com/item',
     'world.tmall.com/item',
     'detail.1688.com',
-	'detail.tmall.hk/hk/item'
+    'detail.tmall.hk/hk/item'
 ];
 
-NHToolbar.prototype.setSidebarState = function(data)
-{
+NHToolbar.prototype.setSidebarState = function (data) {
     var instance = this;
 
     if (typeof this.sidebar.state === 'undefined' || this.sidebar.state === null) {
-        this.sidebar.state = {website:"taobao.com"};
+        this.sidebar.state = { website: "taobao.com" };
     }
     var oldState = this.sidebar.state;
 
@@ -236,7 +234,7 @@ NHToolbar.prototype.setSidebarState = function(data)
         this.sidebar.state.screen = false;
         HTMLUtil.select('.nhtq-sidebar-content').style.display = 'none';
 
-        HTMLUtil.each(this.sidebar.buttons, function(element) {
+        HTMLUtil.each(this.sidebar.buttons, function (element) {
             element.classList.remove('nh-selected');
         });
     }
@@ -248,14 +246,14 @@ NHToolbar.prototype.setSidebarState = function(data)
             }
         }
 
-        HTMLUtil.each(this.sidebar.screens, function(screen) {
+        HTMLUtil.each(this.sidebar.screens, function (screen) {
             screen.style.display = 'none';
         });
-        var selected = HTMLUtil.select('.nhtq-sidebar-screen[data-screen="'+this.sidebar.state.screen+'"]');
+        var selected = HTMLUtil.select('.nhtq-sidebar-screen[data-screen="' + this.sidebar.state.screen + '"]');
         selected.style.display = 'block';
 
         HTMLUtil.select('.nhtq-sidebar-title').innerHTML = selected.getAttribute('data-screen-title');
-        HTMLUtil.each(this.sidebar.buttons, function(btn) {
+        HTMLUtil.each(this.sidebar.buttons, function (btn) {
             if (btn.getAttribute('data-screen') === originScreen) {
                 btn.classList.add('nh-selected');
             } else {
@@ -265,22 +263,22 @@ NHToolbar.prototype.setSidebarState = function(data)
     }
     if (typeof this.sidebar.state.website !== 'undefined' && this.sidebar.state.website !== null) {
         var elements = HTMLUtil.selectAll('.nhtq-select-website a');
-        HTMLUtil.each(elements, function(element) {
+        HTMLUtil.each(elements, function (element) {
             element.classList.remove('nh-selected');
         });
 
-        HTMLUtil.select('.nhtq-select-website a[data-website="'+this.sidebar.state.website+'"]').classList.add('nh-selected');
+        HTMLUtil.select('.nhtq-select-website a[data-website="' + this.sidebar.state.website + '"]').classList.add('nh-selected');
     }
     if (typeof this.sidebar.state.searchResult !== 'undefined' && this.sidebar.state.searchResult !== null) {
         var html = '';
         if (this.sidebar.state.searchResult.length > 0) {
-            for(i = 0; i < this.sidebar.state.searchResult.length; i++) {
+            for (i = 0; i < this.sidebar.state.searchResult.length; i++) {
                 var word = this.sidebar.state.searchResult[i];
                 html += '<div class="nh-search-item">' +
-                            '<div class="nh-search-keyword">' +
-                                '<a href="'+ HTMLUtil.getSearchUrl(this.sidebar.state.website, word.keyword_cn) +'" target="_blank">' +
-                                word.keyword_label + '</a></div>' +
-                        '</div>';
+                    '<div class="nh-search-keyword">' +
+                    '<a href="' + HTMLUtil.getSearchUrl(this.sidebar.state.website, word.keyword_cn) + '" target="_blank">' +
+                    word.keyword_label + '</a></div>' +
+                    '</div>';
             }
         } else {
             html += '<div class="nh-search-item" style="color:#c00;">Kh\u00f4ng c\u00f3 k\u1ebft qu\u1ea3 n\u00e0o \u0111\u01b0\u1ee3c t\u00ecm th\u1ea5y.</div>';
@@ -289,10 +287,9 @@ NHToolbar.prototype.setSidebarState = function(data)
     }
 }
 
-NHToolbar.prototype.render = function()
-{
+NHToolbar.prototype.render = function () {
     var instance = this;
-    HTMLUtil.get(nhtqConfig.apiDomain + 'screen/index', function(res) {
+    HTMLUtil.get(nhtqConfig.apiDomain + 'screen/index', function (res) {
         instance.sidebar = document.createElement('div');
         instance.sidebar.setAttribute('id', 'nhtqSideBar');
         instance.sidebar.innerHTML = res;
@@ -306,10 +303,10 @@ NHToolbar.prototype.render = function()
         instance.sidebar.screens = HTMLUtil.selectAll('.nhtq-sidebar-screen', instance.sidebar);
         instance.sidebar.buttons = HTMLUtil.selectAll('.nh-sidebar-btn', instance.sidebar);
         //
-        HTMLUtil.each(instance.sidebar.buttons, function(lnk) {
-            lnk.onclick = function(event) {
+        HTMLUtil.each(instance.sidebar.buttons, function (lnk) {
+            lnk.onclick = function (event) {
                 if (this.classList.contains('nh-selected')) {
-                    instance.setSidebarState({isShowContent:false});
+                    instance.setSidebarState({ isShowContent: false });
                     return false;
                 }
 
@@ -320,14 +317,14 @@ NHToolbar.prototype.render = function()
                 return false;
             }
         });
-        HTMLUtil.select('.nh-sidebar-close', instance.sidebar).onclick = function() {
-            instance.setSidebarState({isShowContent:false});
+        HTMLUtil.select('.nh-sidebar-close', instance.sidebar).onclick = function () {
+            instance.setSidebarState({ isShowContent: false });
             return false;
         };
         var elements = HTMLUtil.selectAll('.nhtq-select-website a');
-        HTMLUtil.each(elements, function(element) {
-            element.onclick = function() {
-                instance.setSidebarState({website:this.getAttribute('data-website')});
+        HTMLUtil.each(elements, function (element) {
+            element.onclick = function () {
+                instance.setSidebarState({ website: this.getAttribute('data-website') });
                 return false;
             };
         });
@@ -335,12 +332,12 @@ NHToolbar.prototype.render = function()
         var txtKeyword = HTMLUtil.select('#nhTxtKeyword');
         var patternNumberOnly = /^(\d+)$/;
         var btnViewItem = HTMLUtil.select('#nhBtnViewItem');
-        HTMLUtil.addEvent(txtKeyword, 'keyup', function(event) {
+        HTMLUtil.addEvent(txtKeyword, 'keyup', function (event) {
             var keyword = txtKeyword.value.trim();
             if (patternNumberOnly.test(keyword)) {
                 if (keyword.length >= 5) {
                     btnViewItem.style.display = 'block';
-                    btnViewItem.onclick = function() {
+                    btnViewItem.onclick = function () {
                         var url = HTMLUtil.getItemUrl(instance.sidebar.state.website, keyword);
                         if (url !== null) {
                             window.open(url, '_blank');
@@ -354,20 +351,19 @@ NHToolbar.prototype.render = function()
             if (idxTimeout !== null) {
                 clearTimeout(idxTimeout);
             }
-            idxTimeout = setTimeout(function() {
-                HTMLUtil.get(nhtqConfig.apiDomain + 'autoComplete/search?term=' + encodeURIComponent(keyword), function(res) {
+            idxTimeout = setTimeout(function () {
+                HTMLUtil.get(nhtqConfig.apiDomain + 'autoComplete/search?term=' + encodeURIComponent(keyword), function (res) {
                     var words = JSON.parse(res);
-                    instance.setSidebarState({searchResult: words});
+                    instance.setSidebarState({ searchResult: words });
                 });
             }, 500);
         });
 
-        instance.setSidebarState({website:instance.website});
+        instance.setSidebarState({ website: instance.website });
     });
 }
 
-NHToolbar.prototype.renderItemInfo = function()
-{
+NHToolbar.prototype.renderItemInfo = function () {
     switch (this.website) {
         case 'taobao.com':
             this.renderItemInfoTaobao();
@@ -386,15 +382,15 @@ NHToolbar.prototype.renderItemInfo = function()
     var instance = this;
     var btnAddToCart = HTMLUtil.select('#nhtqBtnAddToCart');
     if (btnAddToCart) {
-        btnAddToCart.onclick = function() {
+        btnAddToCart.onclick = function () {
             instance.addToCart();
         }
     }
     var btnLoveItem = HTMLUtil.select('#nhtqBtnLoveItem');
     if (btnLoveItem) {
-        btnLoveItem.onclick = function() {
+        btnLoveItem.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', {parent:'#nhtqLoveMsg'});
+                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', { parent: '#nhtqLoveMsg' });
                 return;
             }
             var data = {
@@ -406,16 +402,16 @@ NHToolbar.prototype.renderItemInfo = function()
                 siteName: instance.website,
                 itemUrl: instance.item.url
             };
-            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', {postData: data}, function(res) {
-                HTMLUtil.alert(res.msg, {parent:'#nhtqLoveMsg', type: 'success'});
+            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', { postData: data }, function (res) {
+                HTMLUtil.alert(res.msg, { parent: '#nhtqLoveMsg', type: 'success' });
             });
         };
     }
     var btnLoveShop = HTMLUtil.select('#nhtqBtnLoveShop');
     if (btnLoveShop) {
-        btnLoveShop.onclick = function() {
+        btnLoveShop.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam shop v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', {parent:'#nhtqLoveMsg'});
+                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam shop v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', { parent: '#nhtqLoveMsg' });
                 return;
             }
             var data = {
@@ -425,15 +421,14 @@ NHToolbar.prototype.renderItemInfo = function()
                 siteName: instance.website,
                 itemUrl: instance.shop.url
             };
-            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', {postData: data}, function(res) {
-                HTMLUtil.alert(res.msg, {parent:'#nhtqLoveMsg', type: 'success'});
+            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', { postData: data }, function (res) {
+                HTMLUtil.alert(res.msg, { parent: '#nhtqLoveMsg', type: 'success' });
             });
         };
     }
 }
 
-NHToolbar.prototype.renderItemInfo1688 = function()
-{
+NHToolbar.prototype.renderItemInfo1688 = function () {
     var html = this.getItemInfoHTML(this.item);
     var t = HTMLUtil.selectAll('.obj-order');
     if (t.length === 0) {
@@ -459,13 +454,13 @@ NHToolbar.prototype.renderItemInfo1688 = function()
         }
 
         if (elements) {
-            HTMLUtil.each(elements, function(element) {
+            HTMLUtil.each(elements, function (element) {
                 var amountInput = HTMLUtil.select('input[type=text]', element);
                 var buttonUp = HTMLUtil.selectAll('a', element);
 
-                buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function() {
+                buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function () {
                     clearTimeout(instance.timeoutResourceId);
-                    instance.timeoutResourceId = setTimeout(function() {
+                    instance.timeoutResourceId = setTimeout(function () {
                         instance.updateSelectedSKU1688();
                     }, 500);
                 }
@@ -475,8 +470,7 @@ NHToolbar.prototype.renderItemInfo1688 = function()
     }
 }
 
-NHToolbar.prototype.renderItemInfoTaobao = function()
-{
+NHToolbar.prototype.renderItemInfoTaobao = function () {
     var html = this.getItemInfoHTML(this.item);
     var originButtonParent = HTMLUtil.select('#J_box_buycart');
     if (originButtonParent === null) {
@@ -488,9 +482,9 @@ NHToolbar.prototype.renderItemInfoTaobao = function()
         originButtonParent.innerHTML = '';
         var ele = HTMLUtil.select('#J_Title');
         // if (ele) {
-            var div = document.createElement('div');
-            div.innerHTML = html;
-            originButtonParent.appendChild(div);
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        originButtonParent.appendChild(div);
         // }
         // J_isSku
         var instance = this;
@@ -500,7 +494,7 @@ NHToolbar.prototype.renderItemInfoTaobao = function()
             for (var i = 0; i < jskuAElements.length; i++) {
                 jskuAElements[i].onclick = function () {
                     clearTimeout(instance.timeoutResourceId);
-                    instance.timeoutResourceId = setTimeout(function() {
+                    instance.timeoutResourceId = setTimeout(function () {
                         instance.updateSelectedSKUTaobao();
                     }, 500);
                 };
@@ -510,9 +504,9 @@ NHToolbar.prototype.renderItemInfoTaobao = function()
         var amountInput = HTMLUtil.select('#J_Stock input[type=text]');
         var buttonUp = HTMLUtil.selectAll('#J_Stock a');
         if (buttonUp !== null && buttonUp !== undefined && buttonUp.length > 0) {
-            buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function() {
+            buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function () {
                 clearTimeout(instance.timeoutResourceId);
-                instance.timeoutResourceId = setTimeout(function() {
+                instance.timeoutResourceId = setTimeout(function () {
                     instance.updateSelectedSKUTaobao();
                 }, 500);
             };
@@ -522,8 +516,7 @@ NHToolbar.prototype.renderItemInfoTaobao = function()
     }
 }
 
-NHToolbar.prototype.renderItemInfoTmall = function()
-{
+NHToolbar.prototype.renderItemInfoTmall = function () {
     var html = this.getItemInfoHTML(this.item);
     var originButtonParent = HTMLUtil.select('.tb-action.tm-clear');
     if (originButtonParent) {
@@ -531,9 +524,9 @@ NHToolbar.prototype.renderItemInfoTmall = function()
         originButtonParent.innerHTML = '';
         // var ele = HTMLUtil.select('.tb-detail-hd');
         // if (ele) {
-            var div = document.createElement('div');
-            div.innerHTML = html;
-            originButtonParent.appendChild(div);
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        originButtonParent.appendChild(div);
         // }
         // J_isSku
         var instance = this;
@@ -543,7 +536,7 @@ NHToolbar.prototype.renderItemInfoTmall = function()
             for (var i = 0; i < jskuAElements.length; i++) {
                 jskuAElements[i].onclick = function () {
                     clearTimeout(instance.timeoutResourceId);
-                    instance.timeoutResourceId = setTimeout(function() {
+                    instance.timeoutResourceId = setTimeout(function () {
                         instance.updateSelectedSKUTmall();
                     }, 500);
                 };
@@ -553,9 +546,9 @@ NHToolbar.prototype.renderItemInfoTmall = function()
         var amountInput = HTMLUtil.select('.tb-amount-widget input[type=text]');
         var buttonUp = HTMLUtil.selectAll('.mui-amount-btn span');
         if (buttonUp !== null && buttonUp !== undefined && buttonUp.length > 0) {
-            buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function() {
+            buttonUp[0].onclick = buttonUp[1].onclick = amountInput.onkeyup = function () {
                 clearTimeout(instance.timeoutResourceId);
-                instance.timeoutResourceId = setTimeout(function() {
+                instance.timeoutResourceId = setTimeout(function () {
                     instance.updateSelectedSKUTmall();
                 }, 500);
             };
@@ -565,7 +558,7 @@ NHToolbar.prototype.renderItemInfoTmall = function()
     }
 }
 
-NHToolbar.prototype.getItemInfoHTML = function(item) {
+NHToolbar.prototype.getItemInfoHTML = function (item) {
     var htmlPriceRange = '';
     if (this.website == '1688.com') {
         if (item.price_ranges !== null && item.price_ranges.length > 0) {
@@ -602,7 +595,7 @@ NHToolbar.prototype.getItemInfoHTML = function(item) {
                 '<div class="nhtq-price-range-item">' +
                 '<div class="nhtq-price-range-quantity mgr-btm-10">&ge;' + item.min_quantity + '</div>' +
                 '<div class="nhtq-price-range-price" id="nhtqStdPrice">' + HTMLUtil.formatMoney(item.min_price_vnd) +
-                ((item.max_price_vnd > 0)? (" - " + HTMLUtil.formatMoney(item.max_price_vnd)):"") +
+                ((item.max_price_vnd > 0) ? (" - " + HTMLUtil.formatMoney(item.max_price_vnd)) : "") +
                 '\u0111</div>' +
                 '</div>' +
                 '<div class="clrb"></div>' +
@@ -614,8 +607,8 @@ NHToolbar.prototype.getItemInfoHTML = function(item) {
 
     var htmlShopInfo = '';
     if (this.shop && this.shop.name) {
-        htmlShopInfo = '<tr><td colspan="2">Shop: <a href="'+this.shop.url+'" target="_blank">' + this.shop.name + '</a></td></tr>' +
-            '<tr><td colspan="2"><div id="nhtqLoveMsg"></div><a href="'+this.shop.url+'" target="_blank" class="nhtq-love-item nhtq-go-to-shop">S\u1ea3n ph\u1ea9m c\u00f9ng shop</a> ' +
+        htmlShopInfo = '<tr><td colspan="2">Shop: <a href="' + this.shop.url + '" target="_blank">' + this.shop.name + '</a></td></tr>' +
+            '<tr><td colspan="2"><div id="nhtqLoveMsg"></div><a href="' + this.shop.url + '" target="_blank" class="nhtq-love-item nhtq-go-to-shop">S\u1ea3n ph\u1ea9m c\u00f9ng shop</a> ' +
             '<a href="javascript:void(0)" id="nhtqBtnLoveShop" class="nhtq-love-item nhtq-love-shop">Y\u00eau th\u00edch shop</a> <a href="javascript:void(0)" id="nhtqBtnLoveItem" class="nhtq-love-item">Y\u00eau th\u00edch s\u1ea3n ph\u1ea9m</a>' +
             '</td></tr>';
     }
@@ -623,7 +616,7 @@ NHToolbar.prototype.getItemInfoHTML = function(item) {
     var html =
         '<div class="nhtq-item-info">' +
         '<div class="nhtq-box-title">YOUR_BRAND</div>' +
-            htmlPriceRange + // Khoảng giá nếu có
+        htmlPriceRange + // Khoảng giá nếu có
         '<div class="nhtq-item-detail" style="padding:10px;">' +
         '<table border="1" class="nhtq-table-item-detail">' +
         '<tbody>' + htmlShopInfo +
@@ -648,7 +641,7 @@ NHToolbar.prototype.getItemInfoHTML = function(item) {
     return html;
 }
 
-NHToolbar.prototype.getItemStruct = function() {
+NHToolbar.prototype.getItemStruct = function () {
 
     return {
         "id": null,
@@ -670,9 +663,9 @@ NHToolbar.prototype.getItemStruct = function() {
     }
 }
 
-NHToolbar.prototype.getItemInfo = function() {
+NHToolbar.prototype.getItemInfo = function () {
     if (this.isItemDetailPage()) {
-        switch(this.website) {
+        switch (this.website) {
             case "1688.com":
                 return this.getItemInfo1688();
             case "taobao.com":
@@ -688,7 +681,7 @@ NHToolbar.prototype.getItemInfo = function() {
     return null;
 }
 
-NHToolbar.prototype.getItemInfo1688 = function() {
+NHToolbar.prototype.getItemInfo1688 = function () {
     var item = this.getItemStruct();
     // Mã sản phẩm
     if (iDetailConfig !== undefined && iDetailConfig.offerid !== undefined) {
@@ -744,7 +737,7 @@ NHToolbar.prototype.getItemInfo1688 = function() {
     if (iDetailData !== undefined && iDetailData.sku !== undefined && iDetailData.sku.priceRange !== undefined) {
         for (var i = 0, len = iDetailData.sku.priceRange.length; i < len; i++) {
             var range = iDetailData.sku.priceRange[i];
-            var nextRange = (i < len - 1) ? iDetailData.sku.priceRange[i+1] : null;
+            var nextRange = (i < len - 1) ? iDetailData.sku.priceRange[i + 1] : null;
             price_ranges.push({
                 'quantity_start': range[0],
                 'quantity_end': (nextRange != null) ? (nextRange[0] - 1) : null,
@@ -793,7 +786,7 @@ NHToolbar.prototype.getItemInfo1688 = function() {
     return item;
 }
 
-NHToolbar.prototype.getItemInfoTaobao = function() {
+NHToolbar.prototype.getItemInfoTaobao = function () {
     var te = HTMLUtil.select('.operation #buy a');
     if (te) {
         te.innerText = 'Xem chi ti\u1ebft v\u00e0 mua h\u00e0ng';
@@ -818,7 +811,7 @@ NHToolbar.prototype.getItemInfoTaobao = function() {
 
     return item;
 };
-NHToolbar.prototype.getItemInfoTmall = function() {
+NHToolbar.prototype.getItemInfoTmall = function () {
     var item = this.getItemStruct();
     item.title = HTMLUtil.select('#detail .tb-detail-hd h1').innerText;
     item.image = HTMLUtil.select('#detail .tb-booth img').src;
@@ -831,7 +824,7 @@ NHToolbar.prototype.getItemInfoTmall = function() {
     return item;
 };
 NHToolbar.prototype.shopInfoTags1688 = ['.company-name a', '.smt-info a.name', '.content .abstract .company .name'];
-NHToolbar.prototype.getShopInfo = function() {
+NHToolbar.prototype.getShopInfo = function () {
     var shop = {
         id: "",
         name: "",
@@ -843,8 +836,7 @@ NHToolbar.prototype.getShopInfo = function() {
 
     if (this.website === '1688.com') {
 
-        for(var ix in this.shopInfoTags1688)
-        {
+        for (var ix in this.shopInfoTags1688) {
             lnkToShop = HTMLUtil.select(this.shopInfoTags1688[ix]);
             if (lnkToShop) {
                 break;
@@ -870,7 +862,7 @@ NHToolbar.prototype.getShopInfo = function() {
         if (shop.url) {
             shop.url = 'https://' + shop.id + '.1688.com/page/offerlist.htm';
         }
-    } else if(this.website === 'taobao.com') {
+    } else if (this.website === 'taobao.com') {
         if (this.hostname === 'item.taobao.com') {
             if (g_config && g_config.shopName !== undefined) {
                 shop.name = g_config.shopName;
@@ -893,21 +885,19 @@ NHToolbar.prototype.getShopInfo = function() {
             shop.url = 'https://' + shop.id + '.taobao.com/search.htm';
         }
         var addrTags = ['#J_LogisticInfo .tb-location em', '#J_WlAreaInfo #J-From'];
-        for(var i = 0; i < addrTags.length; i++) {
+        for (var i = 0; i < addrTags.length; i++) {
             var addrTag = HTMLUtil.select(addrTags[i]);
             if (typeof addrTag !== 'undefined' && addrTag !== null) {
                 var sa = addrTag.innerHTML.trim();
-                if(sa !== '') {
-                    shop.address = sa.substring(0,2);
+                if (sa !== '') {
+                    shop.address = sa.substring(0, 2);
                     break;
                 }
             }
         }
     } else if (this.website === "tmall.com" || this.website === "tmall.hk") {
-        if (g_config !== undefined && g_config !== null)
-        {
-            if (g_config.shopId !== undefined && g_config.shopId !== null)
-            {
+        if (g_config !== undefined && g_config !== null) {
+            if (g_config.shopId !== undefined && g_config.shopId !== null) {
                 shop.name = decodeURIComponent(g_config.sellerNickName);
                 shop.url = 'https:' + g_config.shopUrl;
                 shop.id = shop.url.replace("http://", "").replace("https://", "").split("/")[0].split('.')[0];
@@ -920,7 +910,7 @@ NHToolbar.prototype.getShopInfo = function() {
         if (typeof addrInput !== 'undefined' && addrInput !== null) {
             var sa = addrInput.value;
             if (sa !== '') {
-                shop.address = sa.substring(0,2);
+                shop.address = sa.substring(0, 2);
             }
         }
     }
@@ -934,7 +924,7 @@ NHToolbar.prototype.priceTag = {
     ]
 };
 
-NHToolbar.prototype.updateSelectedSKU1688 = function() {
+NHToolbar.prototype.updateSelectedSKU1688 = function () {
     this.selectedQuantity = 0;
     this.subtotal = 0;
     // console.log("----");
@@ -1004,7 +994,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function() {
                 var tmpPrice = 0, tmpPriceVnd = 0;
                 for (var i = 0; i < this.item.price_ranges.length; i++) {
                     if (this.item.price_ranges[i].quantity_start <= this.selectedQuantity
-                    && this.item.price_ranges[i].quantity_end >= this.selectedQuantity) {
+                        && this.item.price_ranges[i].quantity_end >= this.selectedQuantity) {
                         tmpPrice = parseFloat(this.item.price_ranges[i].price.replace(",", "."));
                         tmpPriceVnd = this.rmbToVnd(tmpPrice);
                     }
@@ -1012,7 +1002,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function() {
                 if (tmpPrice > 0) {
                     // console.log('Tmp Price: ' + tmpPrice);
                     this.subtotal = 0;
-                    for (var i = 0; i < selectedSku.length; i ++) {
+                    for (var i = 0; i < selectedSku.length; i++) {
                         selectedSku[i].price = tmpPrice;
                         selectedSku[i].price_vnd = tmpPriceVnd;
                         this.subtotal += (selectedSku[i].price_vnd * selectedSku[i].quantity);
@@ -1056,7 +1046,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function() {
     }
 }
 
-NHToolbar.prototype.updateSelectedSKUTaobao = function() {
+NHToolbar.prototype.updateSelectedSKUTaobao = function () {
     this.selectedQuantity = parseInt(HTMLUtil.select('#J_IptAmount').value);
     this.subtotal = 0;
 
@@ -1134,7 +1124,7 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function() {
     HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
 }
 
-NHToolbar.prototype.updateSelectedSKUTmall = function() {
+NHToolbar.prototype.updateSelectedSKUTmall = function () {
     if (this.shop == null || this.shop.id == "") {
         this.shop = this.getShopInfo();
     }
@@ -1207,8 +1197,8 @@ NHToolbar.prototype.updateSelectedSKUTmall = function() {
 }
 
 
-NHToolbar.prototype.addToCart = function() {
-    HTMLUtil.alert("\u0110ang x\u1eed l\u00fd...", {parent:'#nhtqOrderMsg', type:'info'});
+NHToolbar.prototype.addToCart = function () {
+    HTMLUtil.alert("\u0110ang x\u1eed l\u00fd...", { parent: '#nhtqOrderMsg', type: 'info' });
 
     if (this.website === '1688.com') {
         this.updateSelectedSKU1688();
@@ -1225,7 +1215,7 @@ NHToolbar.prototype.addToCart = function() {
     }
 
     if (typeof this.sku !== 'undefined' && this.sku !== null && this.sku.length > 0 && this.selectedQuantity >= this.item.min_quantity) {
-        for(var i = 0; i < this.sku.length; i++) {
+        for (var i = 0; i < this.sku.length; i++) {
             if (typeof this.sku[i].image !== 'undefined' && this.sku[i].image && this.sku[i].image.indexOf("//") === 0) {
                 this.sku[i].image = "https:" + this.sku[i].image;
             }
@@ -1248,15 +1238,15 @@ NHToolbar.prototype.addToCart = function() {
             list_sku: this.sku
         };
         var t = null;
-        HTMLUtil.post(nhtqConfig.apiDomain + "shoppingCart/add", data, function(response) {
+        HTMLUtil.post(nhtqConfig.apiDomain + "shoppingCart/add", data, function (response) {
             if (response.code === 1) {
                 if (t !== null) {
                     clearTimeout(t);
                 }
-                t = setTimeout(function() {
+                t = setTimeout(function () {
                     HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o gi\u1ecf h\u00e0ng. ' +
                         '<a href="' + nhtqConfig.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
-                        {parent: '#nhtqOrderMsg', type: 'success'});
+                        { parent: '#nhtqOrderMsg', type: 'success' });
                 }, 250);
             } else {
                 HTMLUtil.alert('Th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng kh\u00f4ng th\u00e0nh c\u00f4ng: ' + response.message, {
@@ -1266,21 +1256,20 @@ NHToolbar.prototype.addToCart = function() {
         });
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
-            HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', {parent:'#nhtqOrderMsg', type:'error'});
+            HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', { parent: '#nhtqOrderMsg', type: 'error' });
         } else if (this.selectedQuantity) {
-            HTMLUtil.alert('S\u1ed1 l\u01b0\u1ee3ng \u0111\u1eb7t mua qu\u00fd kh\u00e1ch y\u00eau c\u1ea7u kh\u00f4ng ph\u00f9 h\u1ee3p.', {parent:'#nhtqOrderMsg', type:'error'});
+            HTMLUtil.alert('S\u1ed1 l\u01b0\u1ee3ng \u0111\u1eb7t mua qu\u00fd kh\u00e1ch y\u00eau c\u1ea7u kh\u00f4ng ph\u00f9 h\u1ee3p.', { parent: '#nhtqOrderMsg', type: 'error' });
         }
     }
 }
 
 
-NHToolbar.prototype.run = function()
-{
+NHToolbar.prototype.run = function () {
     var instance = this;
 
-    HTMLUtil.addEvent(window, 'load', function() {
+    HTMLUtil.addEvent(window, 'load', function () {
         if (instance.isItemDetailPage()) {
-            setTimeout(function() {
+            setTimeout(function () {
                 instance.renderItemInfo();
             }, 100);
         }
@@ -1289,45 +1278,41 @@ NHToolbar.prototype.run = function()
     instance.render();
 }
 
-NHToolbar.prototype.getHostName = function()
-{
+NHToolbar.prototype.getHostName = function () {
     return window.location.hostname;
 }
 
-NHToolbar.prototype.getWebsite = function()
-{
+NHToolbar.prototype.getWebsite = function () {
     var hostname = this.getHostName();
     if (hostname.indexOf('taobao.com') >= 0) {
         return 'taobao.com';
     } else if (hostname.indexOf('1688.com') >= 0) {
         return '1688.com';
-    } else if(hostname.indexOf('tmall.com') >= 0) {
+    } else if (hostname.indexOf('tmall.com') >= 0) {
         return 'tmall.com';
-    } else if(hostname.indexOf('tmall.hk') >= 0) {
+    } else if (hostname.indexOf('tmall.hk') >= 0) {
         return 'tmall.com';
     }
 }
 
-NHToolbar.prototype.getUrl = function()
-{
+NHToolbar.prototype.getUrl = function () {
     return window.location.href;
 }
 
-NHToolbar.prototype.isItemDetailPage = function()
-{
+NHToolbar.prototype.isItemDetailPage = function () {
     var url = this.getUrl();
-    for(var i in this.itemDetailPatterns) {
+    for (var i in this.itemDetailPatterns) {
         if (~url.indexOf(this.itemDetailPatterns[i])) {
             return true;
         }
     }
-	
+
     return false;
 }
 
-NHToolbar.prototype.rmbToVnd = function(input) {
+NHToolbar.prototype.rmbToVnd = function (input) {
     var commi = 0;
-    switch(this.website) {
+    switch (this.website) {
         case '1688.com':
             commi = this.config.config.service_cost_1688;
             break;
