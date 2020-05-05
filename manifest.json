@@ -10,7 +10,7 @@
   "content_scripts": [
     {
       "css": [ "assets/css/content.css" ],
-      "js": [ "assets/js/content.js" ],
+      "js": [ "assets/js/app.js" ],
       "matches": [
         "*://*.1688.com/*",
         "*://*.taobao.com/*",
@@ -21,7 +21,7 @@
   ],
   "web_accessible_resources": [
     "assets/css/content.css",
-    "assets/js/content.js"
+    "assets/js/app.js"
   ],
   "description": "GOCNSHOP",
   "icons": {
