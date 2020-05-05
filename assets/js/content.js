@@ -615,7 +615,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
 
     var html =
         '<div class="nhtq-item-info">' +
-        '<div class="nhtq-box-title">GOCNSHOP 3</div>' +
+        '<div class="nhtq-box-title">GOCNSHOP</div>' +
         htmlPriceRange + // Khoáº£ng giĂ¡ náº¿u cĂ³
         '<div class="nhtq-item-detail" style="padding:10px;">' +
         '<table border="1" class="nhtq-table-item-detail">' +
@@ -1238,22 +1238,25 @@ NHToolbar.prototype.addToCart = function () {
             list_sku: this.sku
         };
         var t = null;
-        HTMLUtil.post(nhtqConfig.apiDomain + "shoppingCart/add", data, function (response) {
-            if (response.code === 1) {
-                if (t !== null) {
-                    clearTimeout(t);
-                }
-                t = setTimeout(function () {
-                    HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o gi\u1ecf h\u00e0ng. ' +
-                        '<a href="' + nhtqConfig.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
-                        { parent: '#nhtqOrderMsg', type: 'success' });
-                }, 250);
-            } else {
-                HTMLUtil.alert('Th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng kh\u00f4ng th\u00e0nh c\u00f4ng: ' + response.message, {
-                    parent: '#nhtqOrderMsg', type: 'error'
-                });
-            }
-        });
+        //HTMLUtil.post(nhtqConfig.apiDomain + "shoppingCart/add", data, function (response) {
+        //    if (response.code === 1) {
+        //        if (t !== null) {
+        //            clearTimeout(t);
+        //        }
+        //        t = setTimeout(function () {
+        //            HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o gi\u1ecf h\u00e0ng. ' +
+        //                '<a href="' + nhtqConfig.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
+        //                { parent: '#nhtqOrderMsg', type: 'success' });
+        //        }, 250);
+        //    } else {
+        //        HTMLUtil.alert('Th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng kh\u00f4ng th\u00e0nh c\u00f4ng: ' + response.message, {
+        //            parent: '#nhtqOrderMsg', type: 'error'
+        //        });
+        //    }
+        //});
+
+        alert('Yes!');
+
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
             HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', { parent: '#nhtqOrderMsg', type: 'error' });
