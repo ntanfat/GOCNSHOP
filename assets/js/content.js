@@ -1,5 +1,5 @@
 var nhtqConfig = {
-    apiDomain: '//nhaphangtrungquoc.vn/'
+    apiDomain: 'http://demo3.netsoftsolution.net/gocnshop/'
 };
 
 var HTMLUtil = {
@@ -1255,7 +1255,9 @@ NHToolbar.prototype.addToCart = function () {
         //    }
         //});
 
-        alert('Yes!');
+        HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng.' +
+            '<a href="' + nhtqConfig.apiDomain + 'don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>.',
+            { parent: '#nhtqOrderMsg', type: 'success' });
 
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
