@@ -5,7 +5,7 @@ var nhtqConfig = {
 var HTMLUtil = {
     hideElement: function (selector) {
         var element = this.select(selector);
-        if (element != null && typeof element !== 'undefined' && typeof element.style !== 'undefined') {
+        if (element !==null && typeof element !== 'undefined' && typeof element.style !== 'undefined') {
             element.style.display = 'none';
         }
     },
@@ -740,7 +740,7 @@ NHToolbar.prototype.getItemInfo1688 = function () {
             var nextRange = (i < len - 1) ? iDetailData.sku.priceRange[i + 1] : null;
             price_ranges.push({
                 'quantity_start': range[0],
-                'quantity_end': (nextRange != null) ? (nextRange[0] - 1) : null,
+                'quantity_end': (nextRange !==null) ? (nextRange[0] - 1) : null,
                 'price': range[1],
                 'price_vnd': this.rmbToVnd(range[1])
             });
@@ -756,7 +756,7 @@ NHToolbar.prototype.getItemInfo1688 = function () {
                         var prc = parseFloat(range.price.replace(",", "."));
                         price_ranges.push({
                             'quantity_start': range.begin,
-                            'quantity_end': (range.end != "") ? range.end : null,
+                            'quantity_end': (range.end !=="") ? range.end : null,
                             'price': prc,
                             'price_vnd': this.rmbToVnd(prc)
                         });
@@ -1021,7 +1021,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             // Select price from range
             var price = 0;
             var quantity = parseInt(element.value);
-            if (this.item.price_ranges != null && this.item.price_ranges.length > 0) {
+            if (this.item.price_ranges !==null && this.item.price_ranges.length > 0) {
                 for (var i = 0; i < this.item.price_ranges.length; i++) {
                     if (quantity >= this.item.price_ranges[i].quantity_start) {
                         price = this.item.price_ranges[i].price;
@@ -1091,7 +1091,7 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
                 if (selectedProperties[i].style !== undefined
                     && selectedProperties[i].style !== null
                     && selectedProperties[i].style.backgroundImage !== null
-                    && selectedProperties[i].style.backgroundImage.length != "") {
+                    && selectedProperties[i].style.backgroundImage.length !=="") {
 
                     img = selectedProperties[i].style.backgroundImage.slice(4, -1).replace(/"/g, "").replace("30x30", "400x400").trim();
                 }
@@ -1164,7 +1164,7 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
                 if (selectedProperties[i].style !== undefined
                     && selectedProperties[i].style !== null
                     && selectedProperties[i].style.backgroundImage !== null
-                    && selectedProperties[i].style.backgroundImage.length != "") {
+                    && selectedProperties[i].style.backgroundImage.length !=="") {
 
                     img = selectedProperties[i].style.backgroundImage.slice(4, -1).replace(/"/g, "").replace("40x40", "400x400").trim();
                 }
