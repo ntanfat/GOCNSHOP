@@ -615,7 +615,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
 
     var html =
         '<div class="nhtq-item-info">' +
-        '<div class="nhtq-box-title">GOCNSHOP</div>' +
+        '<div class="nhtq-box-title">GOCNSHOP TEST</div>' +
         htmlPriceRange + // Khoáº£ng giĂ¡ náº¿u cĂ³
         '<div class="nhtq-item-detail" style="padding:10px;">' +
         '<table border="1" class="nhtq-table-item-detail">' +
