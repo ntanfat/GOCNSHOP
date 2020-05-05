@@ -1,5 +1,5 @@
 var nhtqConfig = {
-    apiDomain: 'http://demo3.netsoftsolution.net/gocnshop/'
+    apiDomain: '//nhaphangtrungquoc.vn/'
 };
 
 var HTMLUtil = {
@@ -191,7 +191,7 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.post("//nhaphangtrungquoc.vn/" + "config/index", null, function (res) {
+    HTMLUtil.post(nhtqConfig.apiDomain + "config/index", null, function (res) {
         instance.config = res;
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
@@ -1256,7 +1256,7 @@ NHToolbar.prototype.addToCart = function () {
         //});
 
         HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng.' +
-            '<a href="' + nhtqConfig.apiDomain + 'don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>.',
+            '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>.',
             { parent: '#nhtqOrderMsg', type: 'success' });
 
     } else {
