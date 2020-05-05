@@ -191,7 +191,7 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.post(nhtqConfig.apiDomain + "config/index", null, function (res) {
+    HTMLUtil.post("//nhaphangtrungquoc.vn/" + "config/index", null, function (res) {
         instance.config = res;
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
