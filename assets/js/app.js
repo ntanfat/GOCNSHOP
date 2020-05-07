@@ -1,4 +1,4 @@
-var domain = 'http://demo3.netsoftsolution.net/gocnshop/';
+var domain = 'https://demo3.netsoftsolution.net/gocnshop/';
 var path = 'chrome-extension/';
 var version = '?v=' + new Date().getTime();
 
