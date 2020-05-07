@@ -39,7 +39,7 @@ var HTMLUtil = {
         for (p in obj) {
             if (obj.hasOwnProperty(p)) {
                 var k = prefix ? prefix + "[" + p + "]" : p, v = obj[p];
-                str.push((v !== null && typeof v === "object") ?
+                str.push(v !== null && typeof v === "object" ?
                     HTMLUtil.serialize(v, k) :
                     encodeURIComponent(k) + "=" + encodeURIComponent(v));
             }
@@ -93,7 +93,7 @@ var HTMLUtil = {
         }
     },
     addEvent: function (object, type, callback) {
-        if (object === null || typeof (object) === 'undefined') return;
+        if (object === null || typeof object === 'undefined') return;
         if (object.addEventListener) {
             object.addEventListener(type, callback, false);
         } else if (object.attachEvent) {
@@ -565,7 +565,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
                 var range = item.price_ranges[i];
                 htmlTmpRange +=
                     '<div class="nhtq-price-range-item">' +
-                    '<div class="nhtq-price-range-quantity mgr-btm-10">' + ((range.quantity_end !== null) ? (range.quantity_start + ' - ' + range.quantity_end) : ('&ge; ' + range.quantity_start)) + '</div>' +
+                    '<div class="nhtq-price-range-quantity mgr-btm-10">' + (range.quantity_end !== null ? range.quantity_start + ' - ' + range.quantity_end : '&ge; ' + range.quantity_start) + '</div>' +
                     '<div class="nhtq-price-range-price">' + HTMLUtil.formatMoney(range.price_vnd) + '\u0111</div>' +
                     '</div>';
             }
@@ -593,7 +593,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
                 '<div class="nhtq-price-range-item">' +
                 '<div class="nhtq-price-range-quantity mgr-btm-10">&ge;' + item.min_quantity + '</div>' +
                 '<div class="nhtq-price-range-price" id="nhtqStdPrice">' + HTMLUtil.formatMoney(item.min_price_vnd) +
-                ((item.max_price_vnd > 0) ? (" - " + HTMLUtil.formatMoney(item.max_price_vnd)) : "") +
+                (item.max_price_vnd > 0 ? " - " + HTMLUtil.formatMoney(item.max_price_vnd) : "") +
                 '\u0111</div>' +
                 '</div>' +
                 '<div class="clrb"></div>' +
@@ -657,9 +657,9 @@ NHToolbar.prototype.getItemStruct = function () {
         "weight": 0,
         "shop_id": null,
         "shop_name": null,
-        "shop_address": null,
-    }
-}
+        "shop_address": null
+    };
+};
 
 NHToolbar.prototype.getItemInfo = function () {
     if (this.isItemDetailPage()) {
@@ -675,7 +675,7 @@ NHToolbar.prototype.getItemInfo = function () {
     }
 
     return null;
-}
+};
 
 NHToolbar.prototype.getItemInfo1688 = function () {
     var item = this.getItemStruct();
@@ -733,10 +733,10 @@ NHToolbar.prototype.getItemInfo1688 = function () {
     if (iDetailData !== undefined && iDetailData.sku !== undefined && iDetailData.sku.priceRange !== undefined) {
         for (var i = 0, len = iDetailData.sku.priceRange.length; i < len; i++) {
             var range = iDetailData.sku.priceRange[i];
-            var nextRange = (i < len - 1) ? iDetailData.sku.priceRange[i + 1] : null;
+            var nextRange = i < len - 1 ? iDetailData.sku.priceRange[i + 1] : null;
             price_ranges.push({
                 'quantity_start': range[0],
-                'quantity_end': (nextRange !== null) ? (nextRange[0] - 1) : null,
+                'quantity_end': nextRange !== null ? nextRange[0] - 1 : null,
                 'price': range[1],
                 'price_vnd': this.rmbToVnd(range[1])
             });
@@ -744,15 +744,15 @@ NHToolbar.prototype.getItemInfo1688 = function () {
     } else {
         var elementPriceTd = HTMLUtil.selectAll('#mod-detail-price .d-content .price td');
         if (elementPriceTd && elementPriceTd.length > 0) {
-            for (var i = 0; i < elementPriceTd.length; i++) {
-                var range = elementPriceTd[i].getAttribute('data-range');
+            for (i = 0; i < elementPriceTd.length; i++) {
+                range = elementPriceTd[i].getAttribute('data-range');
                 if (range !== undefined && range !== null) {
                     range = JSON.parse(range);
                     if (typeof range.price !== 'undefined') {
                         var prc = parseFloat(range.price.replace(",", "."));
                         price_ranges.push({
                             'quantity_start': range.begin,
-                            'quantity_end': (range.end !== "") ? range.end : null,
+                            'quantity_end': range.end !== "" ? range.end : null,
                             'price': prc,
                             'price_vnd': this.rmbToVnd(prc)
                         });
@@ -762,7 +762,7 @@ NHToolbar.prototype.getItemInfo1688 = function () {
         } else {
             elementPriceTd = HTMLUtil.select('.d-content .obj-price .price-now');
             if (elementPriceTd) {
-                var prc = parseFloat(elementPriceTd.innerHTML);
+                prc = parseFloat(elementPriceTd.innerHTML);
                 price_ranges.push({
                     'quantity_start': 1,
                     'quantity_end': null,
@@ -773,14 +773,14 @@ NHToolbar.prototype.getItemInfo1688 = function () {
         }
     }
 
-    if ((iDetailConfig && (iDetailConfig.isRangePriceSku === "true" || iDetailConfig.isRangePriceSku === true || iDetailConfig.isSKUOffer === "false"))
+    if (iDetailConfig && (iDetailConfig.isRangePriceSku === "true" || iDetailConfig.isRangePriceSku === true || iDetailConfig.isSKUOffer === "false")
         || price_ranges.length > 1
     ) {
         item.price_ranges = price_ranges;
     }
 
     return item;
-}
+};
 
 NHToolbar.prototype.getItemInfoTaobao = function () {
     var te = HTMLUtil.select('.operation #buy a');
@@ -791,7 +791,7 @@ NHToolbar.prototype.getItemInfoTaobao = function () {
 
     var item = this.getItemStruct();
     var titleSelector = '.tb-main-title .t-title';
-    var imageSelector = '.tb-thumb-content img'
+    var imageSelector = '.tb-thumb-content img';
     if (this.hostname === 'item.taobao.com') {
         titleSelector = '.tb-main-title';
         imageSelector = '.tb-booth img';
@@ -904,7 +904,7 @@ NHToolbar.prototype.getShopInfo = function () {
         }
         var addrInput = HTMLUtil.select('input[name=region]');
         if (typeof addrInput !== 'undefined' && addrInput !== null) {
-            var sa = addrInput.value;
+            sa = addrInput.value;
             if (sa !== '') {
                 shop.address = sa.substring(0, 2);
             }
@@ -912,7 +912,7 @@ NHToolbar.prototype.getShopInfo = function () {
     }
 
     return shop;
-}
+};
 
 NHToolbar.prototype.priceTag = {
     "taobao.com": [
@@ -980,7 +980,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
 
                     selectedSku.push(si);
                     this.selectedQuantity += si.quantity;
-                    this.subtotal += (si.price_vnd * si.quantity);
+                    this.subtotal += si.price_vnd * si.quantity;
                 }
             }
 
@@ -988,7 +988,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
                 && typeof this.item.price_ranges !== 'undefined'
                 && this.item.price_ranges.length > 0) {
                 var tmpPrice = 0, tmpPriceVnd = 0;
-                for (var i = 0; i < this.item.price_ranges.length; i++) {
+                for (i = 0; i < this.item.price_ranges.length; i++) {
                     if (this.item.price_ranges[i].quantity_start <= this.selectedQuantity
                         && this.item.price_ranges[i].quantity_end >= this.selectedQuantity) {
                         tmpPrice = parseFloat(this.item.price_ranges[i].price.replace(",", "."));
@@ -998,10 +998,10 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
                 if (tmpPrice > 0) {
                     // console.log('Tmp Price: ' + tmpPrice);
                     this.subtotal = 0;
-                    for (var i = 0; i < selectedSku.length; i++) {
+                    for (i = 0; i < selectedSku.length; i++) {
                         selectedSku[i].price = tmpPrice;
                         selectedSku[i].price_vnd = tmpPriceVnd;
-                        this.subtotal += (selectedSku[i].price_vnd * selectedSku[i].quantity);
+                        this.subtotal += selectedSku[i].price_vnd * selectedSku[i].quantity;
                     }
                 }
             }
@@ -1018,14 +1018,14 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             var price = 0;
             var quantity = parseInt(element.value);
             if (this.item.price_ranges !== null && this.item.price_ranges.length > 0) {
-                for (var i = 0; i < this.item.price_ranges.length; i++) {
+                for (i = 0; i < this.item.price_ranges.length; i++) {
                     if (quantity >= this.item.price_ranges[i].quantity_start) {
                         price = this.item.price_ranges[i].price;
                     }
                 }
 
             }
-            var si = {
+            si = {
                 "name": "",
                 "quantity": quantity,
                 "price": price,
@@ -1034,13 +1034,13 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             this.sku = [];
             this.sku.push(si);
             this.selectedQuantity += quantity;
-            this.subtotal += (si.price_vnd * quantity);
+            this.subtotal += si.price_vnd * quantity;
 
             HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
             HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
         }
     }
-}
+};
 
 NHToolbar.prototype.updateSelectedSKUTaobao = function () {
     this.selectedQuantity = parseInt(HTMLUtil.select('#J_IptAmount').value);
@@ -1063,12 +1063,12 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
 
     // Selected SKU
     this.sku = [];
-    var elementJSKU = (this.hostname === 'item.taobao.com')
+    var elementJSKU = this.hostname === 'item.taobao.com'
         ? HTMLUtil.selectAll('.J_Prop.tb-prop')
         : HTMLUtil.selectAll('#J_SKU dl');
 
     if (elementJSKU !== null && elementJSKU.length > 0) {
-        var selectedProperties = (this.hostname === 'item.taobao.com')
+        var selectedProperties = this.hostname === 'item.taobao.com'
             ? HTMLUtil.selectAll('.J_Prop.tb-prop .tb-selected a')
             : HTMLUtil.selectAll('#J_SKU dl .tb-selected a');
         if (selectedProperties !== null
@@ -1076,7 +1076,7 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
             && selectedProperties.length === elementJSKU.length) {
             var tmpSkuName = [];
             var img = "";
-            for (var i = 0; i < selectedProperties.length; i++) {
+            for (i = 0; i < selectedProperties.length; i++) {
                 if (this.hostname === 'item.taobao.com') {
                     tmpSkuName.push(HTMLUtil.select('span', selectedProperties[i]).innerText.trim());
                 } else {
@@ -1111,14 +1111,14 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
 
     this.subtotal = priceVnd * this.selectedQuantity;
 
-    var ele = HTMLUtil.select('#nhtqStdPrice');
+    ele = HTMLUtil.select('#nhtqStdPrice');
     if (typeof ele !== 'undefined' && ele !== null) {
         ele.innerHTML = HTMLUtil.formatMoney(priceVnd) + '\u0111';
     }
 
     HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
     HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
-}
+};
 
 NHToolbar.prototype.updateSelectedSKUTmall = function () {
     if (this.shop === null || this.shop.id === "") {
@@ -1190,7 +1190,7 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
 
     HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
     HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
-}
+};
 
 
 NHToolbar.prototype.addToCart = function () {
@@ -1275,7 +1275,7 @@ NHToolbar.prototype.addToCart = function () {
         //});
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', true);
+        xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(custom_data));
         xhr.onload = function () {
@@ -1290,7 +1290,7 @@ NHToolbar.prototype.addToCart = function () {
             HTMLUtil.alert('S\u1ed1 l\u01b0\u1ee3ng \u0111\u1eb7t mua qu\u00fd kh\u00e1ch y\u00eau c\u1ea7u kh\u00f4ng ph\u00f9 h\u1ee3p.', { parent: '#nhtqOrderMsg', type: 'error' });
         }
     }
-}
+};
 
 
 NHToolbar.prototype.run = function () {
@@ -1305,11 +1305,11 @@ NHToolbar.prototype.run = function () {
     });
 
     instance.render();
-}
+};
 
 NHToolbar.prototype.getHostName = function () {
     return window.location.hostname;
-}
+};
 
 NHToolbar.prototype.getWebsite = function () {
     var hostname = this.getHostName();
@@ -1322,11 +1322,11 @@ NHToolbar.prototype.getWebsite = function () {
     } else if (hostname.indexOf('tmall.hk') >= 0) {
         return 'tmall.com';
     }
-}
+};
 
 NHToolbar.prototype.getUrl = function () {
     return window.location.href;
-}
+};
 
 NHToolbar.prototype.isItemDetailPage = function () {
     var url = this.getUrl();
@@ -1337,7 +1337,7 @@ NHToolbar.prototype.isItemDetailPage = function () {
     }
 
     return false;
-}
+};
 
 NHToolbar.prototype.rmbToVnd = function (input) {
     var commi = 0;
@@ -1358,9 +1358,9 @@ NHToolbar.prototype.rmbToVnd = function (input) {
 
     amount = Math.ceil(amount);
     if (amount % 100 !== 0) {
-        amount = amount + (100 - (amount % 100));
+        amount = amount + (100 - amount % 100);
     }
     return amount;
-}
+};
 
 var nhtb = new NHToolbar();
