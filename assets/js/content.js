@@ -1274,12 +1274,14 @@ NHToolbar.prototype.addToCart = function () {
         //    //}
         //});
 
-        fetch('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', {
-            method: 'POST',
-            body: JSON.stringify(custom_data)
-        }).then(res => {
-            console.log(res);
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(custom_data));
+        xhr.onload = function () {
+            console.log(this.responseText);
+            console.log('phat test');
+        };
 
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
