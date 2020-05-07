@@ -120,7 +120,6 @@ var HTMLUtil = {
                 break;
             default:
                 return null;
-                break;
         }
         return url;
     },
@@ -142,7 +141,6 @@ var HTMLUtil = {
                 break;
             default:
                 return null;
-                break;
         }
         return url;
     },
@@ -186,7 +184,7 @@ var HTMLUtil = {
             p.appendChild(e);
         }
     }
-}
+};
 
 function NHToolbar() {
     // Init
@@ -285,7 +283,7 @@ NHToolbar.prototype.setSidebarState = function (data) {
         }
         HTMLUtil.select('#nhtqSearchResult').innerHTML = html;
     }
-}
+};
 
 NHToolbar.prototype.render = function () {
     var instance = this;
@@ -315,7 +313,7 @@ NHToolbar.prototype.render = function () {
                     screen: lnk.getAttribute('data-screen')
                 });
                 return false;
-            }
+            };
         });
         HTMLUtil.select('.nh-sidebar-close', instance.sidebar).onclick = function () {
             instance.setSidebarState({ isShowContent: false });
@@ -342,7 +340,7 @@ NHToolbar.prototype.render = function () {
                         if (url !== null) {
                             window.open(url, '_blank');
                         }
-                    }
+                    };
                 } else {
                     btnViewItem.style.display = 'none';
                 }
@@ -361,7 +359,7 @@ NHToolbar.prototype.render = function () {
 
         instance.setSidebarState({ website: instance.website });
     });
-}
+};
 
 NHToolbar.prototype.renderItemInfo = function () {
     switch (this.website) {
@@ -384,7 +382,7 @@ NHToolbar.prototype.renderItemInfo = function () {
     if (btnAddToCart) {
         btnAddToCart.onclick = function () {
             instance.addToCart();
-        }
+        };
     }
     var btnLoveItem = HTMLUtil.select('#nhtqBtnLoveItem');
     if (btnLoveItem) {
@@ -426,7 +424,7 @@ NHToolbar.prototype.renderItemInfo = function () {
             });
         };
     }
-}
+};
 
 NHToolbar.prototype.renderItemInfo1688 = function () {
     var html = this.getItemInfoHTML(this.item);
@@ -463,12 +461,12 @@ NHToolbar.prototype.renderItemInfo1688 = function () {
                     instance.timeoutResourceId = setTimeout(function () {
                         instance.updateSelectedSKU1688();
                     }, 500);
-                }
+                };
             });
             instance.updateSelectedSKU1688();
         }
     }
-}
+};
 
 NHToolbar.prototype.renderItemInfoTaobao = function () {
     var html = this.getItemInfoHTML(this.item);
@@ -514,7 +512,7 @@ NHToolbar.prototype.renderItemInfoTaobao = function () {
 
         instance.updateSelectedSKUTaobao();
     }
-}
+};
 
 NHToolbar.prototype.renderItemInfoTmall = function () {
     var html = this.getItemInfoHTML(this.item);
@@ -556,11 +554,11 @@ NHToolbar.prototype.renderItemInfoTmall = function () {
 
         instance.updateSelectedSKUTmall();
     }
-}
+};
 
 NHToolbar.prototype.getItemInfoHTML = function (item) {
     var htmlPriceRange = '';
-    if (this.website == '1688.com') {
+    if (this.website === '1688.com') {
         if (item.price_ranges !== null && item.price_ranges.length > 0) {
             var htmlTmpRange = '';
             for (var i = 0; i < item.price_ranges.length; i++) {
@@ -639,7 +637,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
         '</div>';
 
     return html;
-}
+};
 
 NHToolbar.prototype.getItemStruct = function () {
 
@@ -670,11 +668,9 @@ NHToolbar.prototype.getItemInfo = function () {
                 return this.getItemInfo1688();
             case "taobao.com":
                 return this.getItemInfoTaobao();
-                break;
             case "tmall.com":
             case "tmall.hk":
                 return this.getItemInfoTmall();
-                break;
         }
     }
 
@@ -1067,21 +1063,21 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
 
     // Selected SKU
     this.sku = [];
-    var elementJSKU = (this.hostname == 'item.taobao.com')
+    var elementJSKU = (this.hostname === 'item.taobao.com')
         ? HTMLUtil.selectAll('.J_Prop.tb-prop')
         : HTMLUtil.selectAll('#J_SKU dl');
 
     if (elementJSKU !== null && elementJSKU.length > 0) {
-        var selectedProperties = (this.hostname == 'item.taobao.com')
+        var selectedProperties = (this.hostname === 'item.taobao.com')
             ? HTMLUtil.selectAll('.J_Prop.tb-prop .tb-selected a')
             : HTMLUtil.selectAll('#J_SKU dl .tb-selected a');
         if (selectedProperties !== null
             && selectedProperties !== undefined
-            && selectedProperties.length == elementJSKU.length) {
+            && selectedProperties.length === elementJSKU.length) {
             var tmpSkuName = [];
             var img = "";
             for (var i = 0; i < selectedProperties.length; i++) {
-                if (this.hostname == 'item.taobao.com') {
+                if (this.hostname === 'item.taobao.com') {
                     tmpSkuName.push(HTMLUtil.select('span', selectedProperties[i]).innerText.trim());
                 } else {
                     tmpSkuName.push(selectedProperties[i].getAttribute('title').trim());
@@ -1125,7 +1121,7 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
 }
 
 NHToolbar.prototype.updateSelectedSKUTmall = function () {
-    if (this.shop == null || this.shop.id == "") {
+    if (this.shop === null || this.shop.id === "") {
         this.shop = this.getShopInfo();
     }
 
@@ -1153,7 +1149,7 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
         var selectedProperties = HTMLUtil.selectAll('.tb-sku .tb-prop .tb-selected a');
         if (selectedProperties !== null
             && selectedProperties !== undefined
-            && selectedProperties.length == elementJSKU.length) {
+            && selectedProperties.length === elementJSKU.length) {
 
             var tmpSkuName = [];
             var img = "";
@@ -1255,11 +1251,28 @@ NHToolbar.prototype.addToCart = function () {
         //    }
         //});
 
-
         console.log(data);
-        HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
-            '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
-            { parent: '#nhtqOrderMsg', type: 'success' });
+
+        var custom_data = {
+            name: data.title,
+            regular_price: data.list_sku.price_vnd,
+            description: 'Lorem ipsum dolor sit amet',
+            image: data.image,
+            attributes: '',
+            quantity: data.list_sku.quantity
+        };
+
+        $.post('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
+            console.log(res);
+            //if (res === 1) {
+            //HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
+            //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
+            //    { parent: '#nhtqOrderMsg', type: 'success' });
+            //} else {
+            //    HTMLUtil.alert('Thêm sản phẩm vào giỏ hàng không thành công: ',
+            //        { parent: '#nhtqOrderMsg', type: 'error' });
+            //}
+        });
 
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
