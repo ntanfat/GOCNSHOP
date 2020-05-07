@@ -1262,16 +1262,23 @@ NHToolbar.prototype.addToCart = function () {
             quantity: data.list_sku.quantity
         };
 
-        $.post('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
+        //$.post('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
+        //    console.log(res);
+        //    //if (res === 1) {
+        //    //HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
+        //    //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
+        //    //    { parent: '#nhtqOrderMsg', type: 'success' });
+        //    //} else {
+        //    //    HTMLUtil.alert('Thêm sản phẩm vào giỏ hàng không thành công: ',
+        //    //        { parent: '#nhtqOrderMsg', type: 'error' });
+        //    //}
+        //});
+
+        fetch('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', {
+            method: 'POST',
+            body: JSON.stringify(custom_data)
+        }).then(res => {
             console.log(res);
-            //if (res === 1) {
-            //HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
-            //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
-            //    { parent: '#nhtqOrderMsg', type: 'success' });
-            //} else {
-            //    HTMLUtil.alert('Thêm sản phẩm vào giỏ hàng không thành công: ',
-            //        { parent: '#nhtqOrderMsg', type: 'error' });
-            //}
         });
 
     } else {

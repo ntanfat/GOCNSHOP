@@ -1,4 +1,4 @@
-var url = 'https://rawcdn.githack.com/ntanfat/taobao/2f209e0432e7afa6a27f528723ebd43aedac6412/assets/js/content.js';
+var url = 'https://rawcdn.githack.com/ntanfat/taobao/fd7facd26143c270594be4385632da5d87c36ed8/assets/js/content.js';
 var version = '?v=' + new Date().getTime();
 var js = document.createElement('script');
 js.type = 'text/javascript';
