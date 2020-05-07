@@ -9,7 +9,6 @@
   },
   "content_scripts": [
     {
-      "css": [ "assets/css/content.css" ],
       "js": [ "assets/js/app.js" ],
       "matches": [
         "*://*.1688.com/*",
@@ -20,7 +19,6 @@
     }
   ],
   "web_accessible_resources": [
-    "assets/css/content.css",
     "assets/js/app.js"
   ],
   "description": "GOCNSHOP",
