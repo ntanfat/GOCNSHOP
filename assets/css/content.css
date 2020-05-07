@@ -52,7 +52,7 @@
         display: block;
         width: 174px;
         height: 44px;
-        background: url(icon/dathang.png) top left no-repeat;
+        background: url(../images/dathang.png) top left no-repeat;
     }
 
         .nhtq-item-btn-order a:hover {
@@ -197,27 +197,27 @@ nhtqSidebar * {
 }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-logo {
-        background: url(icon/logo-nhtq.png) 14px 10px no-repeat;
+        background: url(../images/logo-nhtq.png) 14px 10px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-user {
-        background: url(icon/user.png) 19px 14px no-repeat;
+        background: url(../images/user.png) 19px 14px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-cart {
-        background: url(icon/cart.png) 18px 18px no-repeat;
+        background: url(../images/cart.png) 18px 18px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-help {
-        background: url(icon/support.png) 19px 17px no-repeat;
+        background: url(../images/support.png) 19px 17px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-contact {
-        background: url(icon/hotline.png) 18px 14px no-repeat;
+        background: url(../images/hotline.png) 18px 14px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-search {
-        background: url(icon/search.png) 18px 17px no-repeat;
+        background: url(../images/search.png) 18px 17px no-repeat;
     }
 
     #nhtqSideBar .nhtq-sidebar-icons a.nh-icon.nh-selected,
@@ -253,7 +253,7 @@ nhtqSidebar * {
 
 #nhtqSideBar .nh-sidebar-close {
     display: block;
-    background: url(icon/sprite-images.png)-24px 1px no-repeat;
+    background: url(../images/sprite-images.png)-24px 1px no-repeat;
     width: 24px;
     height: 24px;
     float: right;
@@ -305,7 +305,7 @@ nhtqSidebar * {
 }
 
 #nhtqSideBar .nhtq-sidebar-form [class^="frm-bar-btn-"] {
-    background-image: url(../../css/images/idb-button.png);
+    background-image: url(../images/idb-button.png);
     background-repeat: no-repeat;
     display: block;
     margin-top: 10px;
@@ -407,7 +407,7 @@ nhtqSidebar * {
 
     .nhtqAlertContent .nhtqAlertIcon {
         display: block;
-        background: url(icon/logo-nhtq.png) top left no-repeat;
+        background: url(../images/logo-nhtq.png) top left no-repeat;
         width: 34px;
         height: 32px;
     }
@@ -458,7 +458,7 @@ nhtqSidebar * {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background: url(icon/sprite-images.png) 0px 0px no-repeat;
+    background: url(../images/sprite-images.png) 0px 0px no-repeat;
     margin: 5px 10px 0 5px;
     float: left;
 }

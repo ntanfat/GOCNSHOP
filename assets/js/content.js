@@ -199,8 +199,6 @@ function NHToolbar() {
         instance.selectedQuantity = 0;
         instance.subtotal = 0;
         instance.run();
-        console.log('F4T');
-        console.log(res);
     });
 }
 
@@ -390,7 +388,7 @@ NHToolbar.prototype.renderItemInfo = function () {
     if (btnLoveItem) {
         btnLoveItem.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', { parent: '#nhtqLoveMsg' });
+                HTMLUtil.alert('Quý khách vui lòng đăng nhập để có thể thêm sản phẩm vào danh sách yêu thích.', { parent: '#nhtqLoveMsg' });
                 return;
             }
             var data = {
@@ -411,7 +409,7 @@ NHToolbar.prototype.renderItemInfo = function () {
     if (btnLoveShop) {
         btnLoveShop.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\u00f3 th\u1ec3 th\u00eam shop v\u00e0o danh s\u00e1ch y\u00eau th\u00edch.', { parent: '#nhtqLoveMsg' });
+                HTMLUtil.alert('Quý khách vui lòng đăng nhập để có thể thêm shop vào danh sách yêu thích.', { parent: '#nhtqLoveMsg' });
                 return;
             }
             var data = {
