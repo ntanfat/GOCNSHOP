@@ -199,6 +199,8 @@ function NHToolbar() {
         instance.selectedQuantity = 0;
         instance.subtotal = 0;
         instance.run();
+        console.log('F4T');
+        console.log(res);
     });
 }
 
@@ -1251,6 +1253,7 @@ NHToolbar.prototype.addToCart = function () {
         //    }
         //});
 
+        console.log('F4T');
         console.log(data);
 
         var custom_data = {
@@ -1279,8 +1282,8 @@ NHToolbar.prototype.addToCart = function () {
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(custom_data));
         xhr.onload = function () {
+            console.log('F4T');
             console.log(this.responseText);
-            console.log('phat test');
         };
 
     } else {
