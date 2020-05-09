@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <body>
-
     <?php
-    header("Access-Control-Allow-Origin: *");
+        $http_origin = $_SERVER['HTTP_ORIGIN'];
+        if ($http_origin == "https://detail.tmall.com" || $http_origin == "https://item.taobao.com" || $http_origin == "https://detail.1688.com")
+        {  
+            header("Access-Control-Allow-Origin: $http_origin");
+        }
+        header("Access-Control-Allow-Credentials: true");
     ?>
 
     <div class="nhtq-sidebar">
