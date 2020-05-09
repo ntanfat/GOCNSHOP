@@ -289,7 +289,7 @@ NHToolbar.prototype.setSidebarState = function (data) {
 
 NHToolbar.prototype.render = function () {
     var instance = this;
-    HTMLUtil.get(nhtqConfig.domain + nhtqConfig.path + 'sidebar.html', function (res) {
+    HTMLUtil.get(nhtqConfig.domain + nhtqConfig.path + 'sidebar.php', function (res) {
         instance.sidebar = document.createElement('div');
         instance.sidebar.setAttribute('id', 'nhtqSideBar');
         instance.sidebar.innerHTML = res;
