@@ -1,4 +1,4 @@
-var nhtqConfig = {
+var gocnshop_config = {
     apiDomain: '//nhaphangtrungquoc.vn/',
     domain: 'https://demo3.netsoftsolution.net/gocnshop/',
     path: 'chrome-extension/'
@@ -158,19 +158,19 @@ var HTMLUtil = {
                 parent = options.parent;
             }
         }
-        var html = '<div class="nhtqAlert nhtqAlert-' + type + '">' +
-            '<div class="nhtqAlertContent">' +
-            '<div class="nhtqAlertMessage">' +
+        var html = '<div class="gocnshopAlert gocnshopAlert-' + type + '">' +
+            '<div class="gocnshopAlertContent">' +
+            '<div class="gocnshopAlertMessage">' +
             msg +
             '</div>' +
-            '<button type="button" class="nhtqAlertClose" data-dismiss="alert" aria-label="Close">' +
+            '<button type="button" class="gocnshopAlertClose" data-dismiss="alert" aria-label="Close">' +
             '<span aria-hidden="true">\u00d7</span>' +
             '</button>' +
             '</div>' +
             '</div>';
         var p = HTMLUtil.select(parent);
         // ÄĂ³ng táº¥t cáº£ alert trong parent
-        var olds = HTMLUtil.selectAll('.nhtqAlertWrap', p);
+        var olds = HTMLUtil.selectAll('.gocnshopAlertWrap', p);
         if (olds.length > 0) {
             for (var i = 0; i < olds.length; i++) {
                 olds[i].parentNode.removeChild(olds[i]);
@@ -178,9 +178,9 @@ var HTMLUtil = {
         }
         if (typeof p !== 'undefined' && p !== null) {
             var e = document.createElement('div');
-            e.classList.add('nhtqAlertWrap');
+            e.classList.add('gocnshopAlertWrap');
             e.innerHTML = html;
-            HTMLUtil.select('.nhtqAlertClose', e).onclick = function () {
+            HTMLUtil.select('.gocnshopAlertClose', e).onclick = function () {
                 e.parentNode.removeChild(e);
             };
             p.appendChild(e);
@@ -191,7 +191,7 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.post(nhtqConfig.apiDomain + "config/index", null, function (res) {
+    HTMLUtil.post(gocnshop_config.apiDomain + "config/index", null, function (res) {
         instance.config = res;
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
@@ -229,10 +229,10 @@ NHToolbar.prototype.setSidebarState = function (data) {
     }
 
     if (this.sidebar.state.isShowContent) {
-        HTMLUtil.select('.nhtq-sidebar-content').style.display = 'block';
+        HTMLUtil.select('.gocnshop-sidebar-content').style.display = 'block';
     } else {
         this.sidebar.state.screen = false;
-        HTMLUtil.select('.nhtq-sidebar-content').style.display = 'none';
+        HTMLUtil.select('.gocnshop-sidebar-content').style.display = 'none';
 
         HTMLUtil.each(this.sidebar.buttons, function (element) {
             element.classList.remove('nh-selected');
@@ -249,10 +249,10 @@ NHToolbar.prototype.setSidebarState = function (data) {
         HTMLUtil.each(this.sidebar.screens, function (screen) {
             screen.style.display = 'none';
         });
-        var selected = HTMLUtil.select('.nhtq-sidebar-screen[data-screen="' + this.sidebar.state.screen + '"]');
+        var selected = HTMLUtil.select('.gocnshop-sidebar-screen[data-screen="' + this.sidebar.state.screen + '"]');
         selected.style.display = 'block';
 
-        HTMLUtil.select('.nhtq-sidebar-title').innerHTML = selected.getAttribute('data-screen-title');
+        HTMLUtil.select('.gocnshop-sidebar-title').innerHTML = selected.getAttribute('data-screen-title');
         HTMLUtil.each(this.sidebar.buttons, function (btn) {
             if (btn.getAttribute('data-screen') === originScreen) {
                 btn.classList.add('nh-selected');
@@ -262,12 +262,12 @@ NHToolbar.prototype.setSidebarState = function (data) {
         });
     }
     if (typeof this.sidebar.state.website !== 'undefined' && this.sidebar.state.website !== null) {
-        var elements = HTMLUtil.selectAll('.nhtq-select-website a');
+        var elements = HTMLUtil.selectAll('.gocnshop-select-website a');
         HTMLUtil.each(elements, function (element) {
             element.classList.remove('nh-selected');
         });
 
-        HTMLUtil.select('.nhtq-select-website a[data-website="' + this.sidebar.state.website + '"]').classList.add('nh-selected');
+        HTMLUtil.select('.gocnshop-select-website a[data-website="' + this.sidebar.state.website + '"]').classList.add('nh-selected');
     }
     if (typeof this.sidebar.state.searchResult !== 'undefined' && this.sidebar.state.searchResult !== null) {
         var html = '';
@@ -283,24 +283,24 @@ NHToolbar.prototype.setSidebarState = function (data) {
         } else {
             html += '<div class="nh-search-item" style="color:#c00;">Kh\u00f4ng c\u00f3 k\u1ebft qu\u1ea3 n\u00e0o \u0111\u01b0\u1ee3c t\u00ecm th\u1ea5y.</div>';
         }
-        HTMLUtil.select('#nhtqSearchResult').innerHTML = html;
+        HTMLUtil.select('#gocnshopSearchResult').innerHTML = html;
     }
 };
 
 NHToolbar.prototype.render = function () {
     var instance = this;
-    HTMLUtil.get(nhtqConfig.domain + nhtqConfig.path + 'sidebar.php', function (res) {
+    HTMLUtil.get(gocnshop_config.domain + gocnshop_config.path + 'sidebar.php', function (res) {
         instance.sidebar = document.createElement('div');
-        instance.sidebar.setAttribute('id', 'nhtqSideBar');
+        instance.sidebar.setAttribute('id', 'gocnshopSideBar');
         instance.sidebar.innerHTML = res;
 
         var body = document.getElementsByTagName('body')[0];
         body.insertBefore(instance.sidebar, body.firstChild);
         HTMLUtil.fullHeight(instance.sidebar);
-        HTMLUtil.fullHeight(HTMLUtil.select('.nhtq-sidebar-icons', instance.sidebar));
+        HTMLUtil.fullHeight(HTMLUtil.select('.gocnshop-sidebar-icons', instance.sidebar));
 
         //
-        instance.sidebar.screens = HTMLUtil.selectAll('.nhtq-sidebar-screen', instance.sidebar);
+        instance.sidebar.screens = HTMLUtil.selectAll('.gocnshop-sidebar-screen', instance.sidebar);
         instance.sidebar.buttons = HTMLUtil.selectAll('.nh-sidebar-btn', instance.sidebar);
         //
         HTMLUtil.each(instance.sidebar.buttons, function (lnk) {
@@ -321,7 +321,7 @@ NHToolbar.prototype.render = function () {
             instance.setSidebarState({ isShowContent: false });
             return false;
         };
-        var elements = HTMLUtil.selectAll('.nhtq-select-website a');
+        var elements = HTMLUtil.selectAll('.gocnshop-select-website a');
         HTMLUtil.each(elements, function (element) {
             element.onclick = function () {
                 instance.setSidebarState({ website: this.getAttribute('data-website') });
@@ -352,7 +352,7 @@ NHToolbar.prototype.render = function () {
                 clearTimeout(idxTimeout);
             }
             idxTimeout = setTimeout(function () {
-                HTMLUtil.get(nhtqConfig.apiDomain + 'autoComplete/search?term=' + encodeURIComponent(keyword), function (res) {
+                HTMLUtil.get(gocnshop_config.apiDomain + 'autoComplete/search?term=' + encodeURIComponent(keyword), function (res) {
                     var words = JSON.parse(res);
                     instance.setSidebarState({ searchResult: words });
                 });
@@ -380,17 +380,17 @@ NHToolbar.prototype.renderItemInfo = function () {
 
     // Add `add-to-cart` event
     var instance = this;
-    var btnAddToCart = HTMLUtil.select('#nhtqBtnAddToCart');
+    var btnAddToCart = HTMLUtil.select('#gocnshopBtnAddToCart');
     if (btnAddToCart) {
         btnAddToCart.onclick = function () {
             instance.addToCart();
         };
     }
-    var btnLoveItem = HTMLUtil.select('#nhtqBtnLoveItem');
+    var btnLoveItem = HTMLUtil.select('#gocnshopBtnLoveItem');
     if (btnLoveItem) {
         btnLoveItem.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\xfd kh\xe1ch vui l\xf2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\xf3 th\u1ec3 th\xeam s\u1ea3n ph\u1ea9m v\xe0o danh s\xe1ch y\xeau th\xedch.', { parent: '#nhtqLoveMsg' });
+                HTMLUtil.alert('Qu\xfd kh\xe1ch vui l\xf2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\xf3 th\u1ec3 th\xeam s\u1ea3n ph\u1ea9m v\xe0o danh s\xe1ch y\xeau th\xedch.', { parent: '#gocnshopLoveMsg' });
                 return;
             }
             var data = {
@@ -402,16 +402,16 @@ NHToolbar.prototype.renderItemInfo = function () {
                 siteName: instance.website,
                 itemUrl: instance.item.url
             };
-            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', { postData: data }, function (res) {
-                HTMLUtil.alert(res.msg, { parent: '#nhtqLoveMsg', type: 'success' });
+            HTMLUtil.post(gocnshop_config.apiDomain + 'favourite/add', { postData: data }, function (res) {
+                HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
     }
-    var btnLoveShop = HTMLUtil.select('#nhtqBtnLoveShop');
+    var btnLoveShop = HTMLUtil.select('#gocnshopBtnLoveShop');
     if (btnLoveShop) {
         btnLoveShop.onclick = function () {
             if (!instance.config.user) {
-                HTMLUtil.alert('Qu\xfd kh\xe1ch vui l\xf2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\xf3 th\u1ec3 th\xeam shop v\xe0o danh s\xe1ch y\xeau th\xedch.', { parent: '#nhtqLoveMsg' });
+                HTMLUtil.alert('Qu\xfd kh\xe1ch vui l\xf2ng \u0111\u0103ng nh\u1eadp \u0111\u1ec3 c\xf3 th\u1ec3 th\xeam shop v\xe0o danh s\xe1ch y\xeau th\xedch.', { parent: '#gocnshopLoveMsg' });
                 return;
             }
             var data = {
@@ -421,8 +421,8 @@ NHToolbar.prototype.renderItemInfo = function () {
                 siteName: instance.website,
                 itemUrl: instance.shop.url
             };
-            HTMLUtil.post(nhtqConfig.apiDomain + 'favourite/add', { postData: data }, function (res) {
-                HTMLUtil.alert(res.msg, { parent: '#nhtqLoveMsg', type: 'success' });
+            HTMLUtil.post(gocnshop_config.apiDomain + 'favourite/add', { postData: data }, function (res) {
+                HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
     }
@@ -566,19 +566,19 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
             for (var i = 0; i < item.price_ranges.length; i++) {
                 var range = item.price_ranges[i];
                 htmlTmpRange +=
-                    '<div class="nhtq-price-range-item">' +
-                    '<div class="nhtq-price-range-quantity mgr-btm-10">' + (range.quantity_end !== null ? range.quantity_start + ' - ' + range.quantity_end : '&ge; ' + range.quantity_start) + '</div>' +
-                    '<div class="nhtq-price-range-price">' + HTMLUtil.formatMoney(range.price_vnd) + '\u0111</div>' +
+                    '<div class="gocnshop-price-range-item">' +
+                    '<div class="gocnshop-price-range-quantity mgr-btm-10">' + (range.quantity_end !== null ? range.quantity_start + ' - ' + range.quantity_end : '&ge; ' + range.quantity_start) + '</div>' +
+                    '<div class="gocnshop-price-range-price">' + HTMLUtil.formatMoney(range.price_vnd) + '\u0111</div>' +
                     '</div>';
             }
 
             htmlPriceRange =
-                '<div class="nhtq-price-range">' +
-                '<div class="nhtq-price-range-left">' +
+                '<div class="gocnshop-price-range">' +
+                '<div class="gocnshop-price-range-left">' +
                 '<div class="lbl-quantity mgr-btm-10">S\u1ed1 l\u01b0\u1ee3ng:</div>' +
                 '<div class="lbl-quantity">Gi\u00e1 b\u00e1n:</div>' +
                 '</div>' +
-                '<div class="nhtq-price-range-right">' +
+                '<div class="gocnshop-price-range-right">' +
                 htmlTmpRange +
                 '<div class="clrb"></div>' +
                 '</div>' +
@@ -586,15 +586,15 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
                 '</div>';
         } else {
             htmlPriceRange =
-                '<div class="nhtq-price-range">' +
-                '<div class="nhtq-price-range-left">' +
+                '<div class="gocnshop-price-range">' +
+                '<div class="gocnshop-price-range-left">' +
                 '<div class="lbl-quantity mgr-btm-10">S\u1ed1 l\u01b0\u1ee3ng:</div>' +
                 '<div class="lbl-quantity">Gi\u00e1 b\u00e1n:</div>' +
                 '</div>' +
-                '<div class="nhtq-price-range-right">' +
-                '<div class="nhtq-price-range-item">' +
-                '<div class="nhtq-price-range-quantity mgr-btm-10">&ge;' + item.min_quantity + '</div>' +
-                '<div class="nhtq-price-range-price" id="nhtqStdPrice">' + HTMLUtil.formatMoney(item.min_price_vnd) +
+                '<div class="gocnshop-price-range-right">' +
+                '<div class="gocnshop-price-range-item">' +
+                '<div class="gocnshop-price-range-quantity mgr-btm-10">&ge;' + item.min_quantity + '</div>' +
+                '<div class="gocnshop-price-range-price" id="gocnshopStdPrice">' + HTMLUtil.formatMoney(item.min_price_vnd) +
                 (item.max_price_vnd > 0 ? " - " + HTMLUtil.formatMoney(item.max_price_vnd) : "") +
                 '\u0111</div>' +
                 '</div>' +
@@ -608,30 +608,30 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
     var htmlShopInfo = '';
     if (this.shop && this.shop.name) {
         htmlShopInfo = '<tr><td colspan="2">Shop: <a href="' + this.shop.url + '" target="_blank">' + this.shop.name + '</a></td></tr>' +
-            '<tr><td colspan="2"><div id="nhtqLoveMsg"></div><a href="' + this.shop.url + '" target="_blank" class="nhtq-love-item nhtq-go-to-shop">S\u1ea3n ph\u1ea9m c\u00f9ng shop</a> ' +
-            '<a href="javascript:void(0)" id="nhtqBtnLoveShop" class="nhtq-love-item nhtq-love-shop">Y\u00eau th\u00edch shop</a> <a href="javascript:void(0)" id="nhtqBtnLoveItem" class="nhtq-love-item">Y\u00eau th\u00edch s\u1ea3n ph\u1ea9m</a>' +
+            '<tr><td colspan="2"><div id="gocnshopLoveMsg"></div><a href="' + this.shop.url + '" target="_blank" class="gocnshop-love-item gocnshop-go-to-shop">S\u1ea3n ph\u1ea9m c\u00f9ng shop</a> ' +
+            '<a href="javascript:void(0)" id="gocnshopBtnLoveShop" class="gocnshop-love-item gocnshop-love-shop">Y\u00eau th\u00edch shop</a> <a href="javascript:void(0)" id="gocnshopBtnLoveItem" class="gocnshop-love-item">Y\u00eau th\u00edch s\u1ea3n ph\u1ea9m</a>' +
             '</td></tr>';
     }
 
     var html =
-        '<div class="nhtq-item-info">' +
-        '<div class="nhtq-box-title">GOCNSHOP</div>' +
+        '<div class="gocnshop-item-info">' +
+        '<div class="gocnshop-box-title">GOCNSHOP</div>' +
         htmlPriceRange + // Khoáº£ng giĂ¡ náº¿u cĂ³
-        '<div class="nhtq-item-detail" style="padding:10px;">' +
-        '<table border="1" class="nhtq-table-item-detail">' +
+        '<div class="gocnshop-item-detail" style="padding:10px;">' +
+        '<table border="1" class="gocnshop-table-item-detail">' +
         '<tbody>' + htmlShopInfo +
         '<tr><td>M\u00e3 s\u1ea3n ph\u1ea9m: <span class="text-red">' + item.id + '</span></td>' +
         '<tr>' +
-        '<td width="50%">\u0110\u00e3 ch\u1ecdn: <span class="text-item-price text-red" id="nhtqSelectedQuantity">0</span></td>' +
-        '<td style="text-align:right;">Th\u00e0nh ti\u1ec1n: <span class="text-item-price text-red" id="nhtqSelectedSubtotal">0\u0111</span></td>' +
+        '<td width="50%">\u0110\u00e3 ch\u1ecdn: <span class="text-item-price text-red" id="gocnshopSelectedQuantity">0</span></td>' +
+        '<td style="text-align:right;">Th\u00e0nh ti\u1ec1n: <span class="text-item-price text-red" id="gocnshopSelectedSubtotal">0\u0111</span></td>' +
         '</tr>' +
         '<tr>' +
-        '<td colspan="2"><div id="nhtqOrderMsg"></div><div class="nhtq-item-btn-order"><a href="javascript:void(0)" id="nhtqBtnAddToCart"></a></div></td>' +
+        '<td colspan="2"><div id="gocnshopOrderMsg"></div><div class="gocnshop-item-btn-order"><a href="javascript:void(0)" id="gocnshopBtnAddToCart"></a></div></td>' +
         '</tr>' +
         '</tbody></table>' +
         '<div class="text-notice clrb">Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn \u0111\u1ea7y \u0111\u1ee7 th\u00f4ng tin s\u1ea3n ph\u1ea9m \u0111\u1ec3 xem gi\u00e1 chu\u1ea9n.</div>' +
         '</div>' +
-        '<div class="nhtq-box-footer" style="text-align:left;padding:5px 10px;">' +
+        '<div class="gocnshop-box-footer" style="text-align:left;padding:5px 10px;">' +
         '<strong>L\u01b0u \u00fd: </strong><br>' +
         'S\u1ea3n ph\u1ea9m y\u00eau c\u1ea7u \u0111\u1eb7t mua s\u1ed1 l\u01b0\u1ee3ng t\u1ed1i thi\u1ec3u l\u00e0: ' + this.item.min_quantity + '<br>' +
         'Qu\u00fd kh\u00e1ch vui l\u00f2ng kh\u00f4ng s\u1eed d\u1ee5ng Google Translate khi \u0111\u1eb7t h\u00e0ng.' +
@@ -1010,8 +1010,8 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
 
             this.sku = selectedSku;
 
-            HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
-            HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
+            HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+            HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
         }
     } else {
         var element = HTMLUtil.select('.obj-amount .unit-detail-amount-control .amount-input');
@@ -1038,8 +1038,8 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             this.selectedQuantity += quantity;
             this.subtotal += si.price_vnd * quantity;
 
-            HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
-            HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
+            HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+            HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
         }
     }
 };
@@ -1113,13 +1113,13 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
 
     this.subtotal = priceVnd * this.selectedQuantity;
 
-    ele = HTMLUtil.select('#nhtqStdPrice');
+    ele = HTMLUtil.select('#gocnshopStdPrice');
     if (typeof ele !== 'undefined' && ele !== null) {
         ele.innerHTML = HTMLUtil.formatMoney(priceVnd) + '\u0111';
     }
 
-    HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
-    HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
+    HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+    HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
 };
 
 NHToolbar.prototype.updateSelectedSKUTmall = function () {
@@ -1185,18 +1185,18 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
     }
 
     this.subtotal = priceVnd * this.selectedQuantity;
-    var ele = HTMLUtil.select('#nhtqStdPrice');
+    var ele = HTMLUtil.select('#gocnshopStdPrice');
     if (typeof ele !== 'undefined' && ele !== null) {
         ele.innerHTML = HTMLUtil.formatMoney(priceVnd) + '\u0111';
     }
 
-    HTMLUtil.select('#nhtqSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
-    HTMLUtil.select('#nhtqSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
+    HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+    HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
 };
 
 
 NHToolbar.prototype.addToCart = function () {
-    HTMLUtil.alert("\u0110ang x\u1eed l\u00fd...", { parent: '#nhtqOrderMsg', type: 'info' });
+    HTMLUtil.alert("\u0110ang x\u1eed l\u00fd...", { parent: '#gocnshopOrderMsg', type: 'info' });
 
     if (this.website === '1688.com') {
         this.updateSelectedSKU1688();
@@ -1236,19 +1236,19 @@ NHToolbar.prototype.addToCart = function () {
             list_sku: this.sku
         };
         var t = null;
-        //HTMLUtil.post(nhtqConfig.apiDomain + "shoppingCart/add", data, function (response) {
+        //HTMLUtil.post(gocnshop_config.apiDomain + "shoppingCart/add", data, function (response) {
         //    if (response.code === 1) {
         //        if (t !== null) {
         //            clearTimeout(t);
         //        }
         //        t = setTimeout(function () {
         //            HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o gi\u1ecf h\u00e0ng. ' +
-        //                '<a href="' + nhtqConfig.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
-        //                { parent: '#nhtqOrderMsg', type: 'success' });
+        //                '<a href="' + gocnshop_config.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
+        //                { parent: '#gocnshopOrderMsg', type: 'success' });
         //        }, 250);
         //    } else {
         //        HTMLUtil.alert('Th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng kh\u00f4ng th\u00e0nh c\u00f4ng: ' + response.message, {
-        //            parent: '#nhtqOrderMsg', type: 'error'
+        //            parent: '#gocnshopOrderMsg', type: 'error'
         //        });
         //    }
         //});
@@ -1270,10 +1270,10 @@ NHToolbar.prototype.addToCart = function () {
         //    //if (res === 1) {
         //    //HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
         //    //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
-        //    //    { parent: '#nhtqOrderMsg', type: 'success' });
+        //    //    { parent: '#gocnshopOrderMsg', type: 'success' });
         //    //} else {
         //    //    HTMLUtil.alert('Thêm sản phẩm vào giỏ hàng không thành công: ',
-        //    //        { parent: '#nhtqOrderMsg', type: 'error' });
+        //    //        { parent: '#gocnshopOrderMsg', type: 'error' });
         //    //}
         //});
 
@@ -1288,9 +1288,9 @@ NHToolbar.prototype.addToCart = function () {
 
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
-            HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', { parent: '#nhtqOrderMsg', type: 'error' });
+            HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', { parent: '#gocnshopOrderMsg', type: 'error' });
         } else if (this.selectedQuantity) {
-            HTMLUtil.alert('S\u1ed1 l\u01b0\u1ee3ng \u0111\u1eb7t mua qu\u00fd kh\u00e1ch y\u00eau c\u1ea7u kh\u00f4ng ph\u00f9 h\u1ee3p.', { parent: '#nhtqOrderMsg', type: 'error' });
+            HTMLUtil.alert('S\u1ed1 l\u01b0\u1ee3ng \u0111\u1eb7t mua qu\u00fd kh\u00e1ch y\u00eau c\u1ea7u kh\u00f4ng ph\u00f9 h\u1ee3p.', { parent: '#gocnshopOrderMsg', type: 'error' });
         }
     }
 };

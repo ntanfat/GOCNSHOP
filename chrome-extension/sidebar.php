@@ -10,25 +10,25 @@
         header("Access-Control-Allow-Credentials: true");
     ?>
 
-    <div class="nhtq-sidebar">
-        <div class="nhtq-sidebar-icons">
+    <div class="gocnshop-sidebar">
+        <div class="gocnshop-sidebar-icons">
             <ul>
                 <li><a href="https://demo3.netsoftsolution.net/gocnshop/" target="_blank" class="nh-icon nh-logo" title="GOCNSHOP"></a></li>
                 <li><a href="javascript:void(0);" class="nh-icon nh-search nh-sidebar-btn" data-screen="search" title="Tìm kiếm sản phẩm"></a></li>
                 <li><a href="https://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank" class="nh-icon nh-cart" title="Giỏ hàng"></a></li>
                 <li><a href="https://demo3.netsoftsolution.net/gocnshop/huong-dan-dat-hang" target="_blank" class="nh-icon nh-help" title="Hướng dẫn đặt hàng"></a></li>
                 <li><a href="javascript:void(0);" class="nh-icon nh-contact nh-sidebar-btn" data-screen="contact" title="Liên hệ" target="parent"></a></li>
-                <li><a href="https://demo3.netsoftsolution.net/gocnshop/" class="nh-icon nh-back nh-sidebar-btn" title="Trở về" target="_blank"></a></li>
+                <li><a href="https://demo3.netsoftsolution.net/gocnshop/" class="nh-icon nh-back" title="Trở về" target="_blank"></a></li>
             </ul>
         </div>
-        <div class="nhtq-sidebar-content">
-            <div class="nhtq-sidebar-header">
-                <b class="nhtq-sidebar-title"></b>
+        <div class="gocnshop-sidebar-content">
+            <div class="gocnshop-sidebar-header">
+                <b class="gocnshop-sidebar-title"></b>
                 <a href="javascript:void(0)" class="nh-sidebar-close" data-screen="none" title="Đóng lại"></a>
                 <div class="clearboth"></div>
             </div>
-            <div class="nhtq-sidebar-screen" data-screen="user" data-screen-title="Tài khoản">
-                <div class="nhtq-user-info">
+            <div class="gocnshop-sidebar-screen" data-screen="user" data-screen-title="Tài khoản">
+                <div class="gocnshop-user-info">
                     <ul>
                         <li class="nh-pp510"><span id="nhUsername"></span></li>
                         <li class="nh-pp510">Số dư: <span id="nhUserWalletBalance" style="color:#c00;font-weight:bold;"></span></li>
@@ -43,9 +43,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="nhtq-sidebar-screen" data-screen="search" data-screen-title="Tìm kiếm">
-                <div class="nhtq-sidebar-form">
-                    <div class="nhtq-row-input nhtq-select-website">
+            <div class="gocnshop-sidebar-screen" data-screen="search" data-screen-title="Tìm kiếm">
+                <div class="gocnshop-sidebar-form">
+                    <div class="gocnshop-row-input gocnshop-select-website">
                         <a href="javascript:void(0)" data-website="taobao.com" class="nh-selected">
                             <img src="https://demo3.netsoftsolution.net/gocnshop/images/logo-taobao-sm.png">
                         </a>
@@ -56,26 +56,20 @@
                             <img src="https://demo3.netsoftsolution.net/gocnshop/images/logo-1688-sm.png">
                         </a>
                     </div>
-                    <div class="nhtq-row-input clearboth">
-                        <input type="text" name="nh-keyword" id="nhTxtKeyword" class="nhtq-form-input" placeholder="Từ khóa hoặc mã sản phẩm">
+                    <div class="gocnshop-row-input clearboth">
+                        <input type="text" name="nh-keyword" id="nhTxtKeyword" class="gocnshop-form-input" placeholder="Từ khóa hoặc mã sản phẩm">
                     </div>
-                    <div class="nhtq-row-input clearboth">
+                    <div class="gocnshop-row-input clearboth">
                         <a id="nhBtnViewItem" href="javascript:void(0)" target="_blank">Xem sản phẩm</a>
                     </div>
-                    <div class="nhtq-row-input nh-search-result" id="nhtqSearchResult"></div>
+                    <div class="gocnshop-row-input nh-search-result" id="gocnshopSearchResult"></div>
                 </div>
             </div>
-            <div class="nhtq-sidebar-screen" data-screen="contact" data-screen-title="Liên hệ">
-                <div class="nhtq-sidebar-screen-content">
-                    <b>Trụ sở tại Hà Nội:</b><br>
-                    Địa chỉ: Số 47, ngõ 16 Hoàng Cầu, Đống Đa, HN<br>
-                    Điện thoại: <b style="color:#c00;">(04-3) 519.0740</b><br>
-                    Email: hotro@gocnshop.com
-                </div>
-                <div class="nhtq-sidebar-screen-content">
-                    <b>Trụ sở tại Tp. Hồ Chí Minh:</b><br>
-                    Địa chỉ: Số 78 cư xá Trần Quang Diệu, P.14, Q3<br>
-                    Điện thoại: <b style="color:#c00;">083.3060.999</b><br>
+            <div class="gocnshop-sidebar-screen" data-screen="contact" data-screen-title="Liên hệ">
+                <div class="gocnshop-sidebar-screen-content" style="width: 210px">
+                    <b>Trụ Sở Chính:</b><br>
+                    Địa chỉ: OG-07.17, Tầng 7 Officetel, 128 Hồng Hà, Phường 9, Quận Phú Nhuận, TP Hồ Chí Minh, Việt Nam.<br>
+                    Điện thoại: <b style="color:#c00;">+84.123456789 - +84.123456789</b><br>
                     Email: hotro@gocnshop.com
                 </div>
             </div>

@@ -4,8 +4,9 @@
     "\\assets",
     "\\assets\\images",
     "\\assets\\images\\icons",
-    "\\assets\\js"
+    "\\assets\\js",
+    "\\chrome-extension"
   ],
-  "SelectedNode": "\\assets\\js\\app.js",
+  "SelectedNode": "\\chrome-extension\\content.css",
   "PreviewInSolutionExplorer": false
 }
