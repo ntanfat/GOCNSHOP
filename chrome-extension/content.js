@@ -1278,7 +1278,7 @@ NHToolbar.prototype.addToCart = function () {
         //});
 
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', true);
+        xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_config', true);
         xhr.setRequestHeader('Content-Type', 'application/json');
         xhr.send(JSON.stringify(custom_data));
         xhr.onload = function () {
