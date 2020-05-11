@@ -191,8 +191,11 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.post(gocnshop_config.apiDomain + "config/index", null, function (res) {
+
+    HTMLUtil.get(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_config', function (response) {
+        var res = JSON.parse(response);
         instance.config = res;
+        console.log(instance.config);
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
         instance.shop = instance.getShopInfo();
@@ -1275,12 +1278,6 @@ NHToolbar.prototype.addToCart = function () {
             attributes: [],
             list_sku: [{
                 name: 'Phat - New Product Name',
-                quantity: 1,
-                price: 300,
-                price_vnd: 1000000,
-                image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png'
-            }, {
-                    name: 'Phat - New Product Name',
                 quantity: 1,
                 price: 300,
                 price_vnd: 1000000,
