@@ -1235,6 +1235,7 @@ NHToolbar.prototype.addToCart = function () {
             shop_address: this.shop.address,
             list_sku: this.sku
         };
+
         var t = null;
         //HTMLUtil.post(gocnshop_config.apiDomain + "shoppingCart/add", data, function (response) {
         //    if (response.code === 1) {
@@ -1253,41 +1254,50 @@ NHToolbar.prototype.addToCart = function () {
         //    }
         //});
 
-        console.log('F4T');
         console.log(data);
 
         var custom_data = {
-            name: data.title,
-            regular_price: data.list_sku.price_vnd,
+            price_vnd: 1000000,
             description: 'Lorem ipsum dolor sit amet',
-            image: data.image,
-            attributes: '',
-            quantity: data.list_sku.quantity
+            short_description: 'Lorem',
+            website: 'https://demo3.netsoftsolution.net/gocnshop/',
+            id: 123456789,
+            title: 'Phat - New Product Name',
+            url: 'https://demo3.netsoftsolution.net/gocnshop/',
+            image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png',
+            ws_rule_number: 1,
+            min_quantity: 1,
+            weight: 50,
+            shop_id: 987654321,
+            shop_name: 'Phat - Shop Name',
+            shop_url: 'https://demo3.netsoftsolution.net/gocnshop/',
+            shop_address: 'Lorem ipsum dolor sit amet',
+            attributes: [],
+            list_sku: [{
+                name: 'Phat - New Product Name',
+                quantity: 1,
+                price: 300,
+                price_vnd: 1000000,
+                image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png'
+            }, {
+                    name: 'Phat - New Product Name',
+                quantity: 1,
+                price: 300,
+                price_vnd: 1000000,
+                image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png'
+            }]
         };
 
-        //$.post('http://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
-        //    console.log(res);
-        //    //if (res === 1) {
-        //    //HTMLUtil.alert('Sản phẩm đã được thêm vào giỏ hàng. ' +
-        //    //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>Xem giỏ hàng &raquo;</b></a>',
-        //    //    { parent: '#gocnshopOrderMsg', type: 'success' });
-        //    //} else {
-        //    //    HTMLUtil.alert('Thêm sản phẩm vào giỏ hàng không thành công: ',
-        //    //        { parent: '#gocnshopOrderMsg', type: 'error' });
-        //    //}
-        //});
-
-        //var xhr = new XMLHttpRequest();
-        //xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_config', true);
-        //xhr.setRequestHeader('Content-Type', 'application/json');
-        //xhr.send(JSON.stringify(custom_data));
-        //xhr.onload = function () {
-        //    console.log('F4T');
-        //    console.log(this.responseText);
-        //};
-
-        HTMLUtil.get(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_config', function (response) {
+        HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (response) {
             console.log(response);
+            //if (res === 1) {
+            //htmlutil.alert('sản phẩm đã được thêm vào giỏ hàng. ' +
+            //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>xem giỏ hàng &raquo;</b></a>',
+            //    { parent: '#gocnshopordermsg', type: 'success' });
+            //} else {
+            //    htmlutil.alert('thêm sản phẩm vào giỏ hàng không thành công: ',
+            //        { parent: '#gocnshopordermsg', type: 'error' });
+            //}
         });
 
     } else {
