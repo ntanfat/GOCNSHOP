@@ -191,10 +191,10 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-
     HTMLUtil.get(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_config', function (response) {
         var res = JSON.parse(response);
         instance.config = res;
+        console.log('');
         console.log(instance.config);
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
@@ -1285,8 +1285,8 @@ NHToolbar.prototype.addToCart = function () {
             }]
         };
 
-        HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (response) {
-            console.log(response);
+        HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
+            console.log(JSON.parse(res));
             //if (res === 1) {
             //htmlutil.alert('sản phẩm đã được thêm vào giỏ hàng. ' +
             //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>xem giỏ hàng &raquo;</b></a>',
@@ -1307,16 +1307,25 @@ NHToolbar.prototype.addToCart = function () {
 };
 
 
+//NHToolbar.prototype.run = function () {
+//    var instance = this;
+//    HTMLUtil.addEvent(window, 'load', function () {
+//        if (instance.isItemDetailPage()) {
+//            setTimeout(function () {
+//                instance.renderItemInfo();
+//            }, 100);
+//        }
+//    });
+
+//    instance.render();
+//};
 NHToolbar.prototype.run = function () {
     var instance = this;
-
-    HTMLUtil.addEvent(window, 'load', function () {
-        if (instance.isItemDetailPage()) {
-            setTimeout(function () {
-                instance.renderItemInfo();
-            }, 100);
-        }
-    });
+    if (instance.isItemDetailPage()) {
+        setTimeout(function () {
+            instance.renderItemInfo();
+        }, 100);
+    }
 
     instance.render();
 };
