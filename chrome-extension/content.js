@@ -1277,14 +1277,18 @@ NHToolbar.prototype.addToCart = function () {
         //    //}
         //});
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_config', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-        xhr.send(JSON.stringify(custom_data));
-        xhr.onload = function () {
-            console.log('F4T');
-            console.log(this.responseText);
-        };
+        //var xhr = new XMLHttpRequest();
+        //xhr.open('POST', 'https://demo3.netsoftsolution.net/gocnshop/wp-admin/admin-ajax.php?action=gocnshop_config', true);
+        //xhr.setRequestHeader('Content-Type', 'application/json');
+        //xhr.send(JSON.stringify(custom_data));
+        //xhr.onload = function () {
+        //    console.log('F4T');
+        //    console.log(this.responseText);
+        //};
+
+        HTMLUtil.get(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_config', function (response) {
+            console.log(response);
+        });
 
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
