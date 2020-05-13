@@ -405,7 +405,7 @@ NHToolbar.prototype.renderItemInfo = function () {
                 siteName: instance.website,
                 itemUrl: instance.item.url
             };
-            HTMLUtil.post(gocnshop_config.apiDomain + 'favourite/add', { postData: data }, function (res) {
+            HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
                 HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
@@ -424,7 +424,7 @@ NHToolbar.prototype.renderItemInfo = function () {
                 siteName: instance.website,
                 itemUrl: instance.shop.url
             };
-            HTMLUtil.post(gocnshop_config.apiDomain + 'favourite/add', { postData: data }, function (res) {
+            HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
                 HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
@@ -1286,7 +1286,8 @@ NHToolbar.prototype.addToCart = function () {
         };
 
         HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
-            console.log(JSON.parse(res));
+            comsole.log('KP');
+            console.log(res);
             //if (res === 1) {
             //htmlutil.alert('sản phẩm đã được thêm vào giỏ hàng. ' +
             //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>xem giỏ hàng &raquo;</b></a>',
@@ -1321,12 +1322,13 @@ NHToolbar.prototype.addToCart = function () {
 //};
 NHToolbar.prototype.run = function () {
     var instance = this;
-    if (instance.isItemDetailPage()) {
-        setTimeout(function () {
-            instance.renderItemInfo();
-        }, 100);
-    }
-
+    setTimeout(function () {
+        if (instance.isItemDetailPage()) {
+            setTimeout(function () {
+                instance.renderItemInfo();
+            }, 100);
+        }
+    }, 5000);
     instance.render();
 };
 
