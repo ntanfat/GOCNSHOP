@@ -3,7 +3,7 @@
 }
 
 .gocnshop-item-info {
-    border: #238054 5px solid;
+    border: #f40 5px solid;
     font-family: "Segoe UI", Tahoma, Arial, Verdana;
     font-size: 13px;
     margin: 10px 0;
@@ -226,7 +226,7 @@ gocnshopSidebar * {
 
     #gocnshopSideBar .gocnshop-sidebar-icons a.nh-icon.nh-selected,
     #gocnshopSideBar .gocnshop-sidebar-icons a.nh-icon:hover {
-        background-color: #238054;
+        background-color: #f40;
     }
 
 #gocnshopSideBar .gocnshop-sidebar-screen {
