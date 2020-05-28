@@ -1,7 +1,7 @@
 var gocnshop_config = {
     apiDomain: '//nhaphangtrungquoc.vn/',
     domain: 'https://demo3.netsoftsolution.net/gocnshop/',
-    path: 'chrome-extension/'
+    path: 'extension/'
 };
 
 var HTMLUtil = {
@@ -191,7 +191,7 @@ var HTMLUtil = {
 function NHToolbar() {
     // Init
     var instance = this;
-    HTMLUtil.get(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_config', function (response) {
+    HTMLUtil.get(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_config', function (response) {
         var res = JSON.parse(response);
         instance.config = res;
         console.log('');
@@ -355,8 +355,9 @@ NHToolbar.prototype.render = function () {
                 clearTimeout(idxTimeout);
             }
             idxTimeout = setTimeout(function () {
-                HTMLUtil.get(gocnshop_config.apiDomain + 'autoComplete/search?term=' + encodeURIComponent(keyword), function (res) {
+                HTMLUtil.get(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_search&term=' + encodeURIComponent(keyword), function (res) {
                     var words = JSON.parse(res);
+                    console.log(words);
                     instance.setSidebarState({ searchResult: words });
                 });
             }, 500);
@@ -401,11 +402,11 @@ NHToolbar.prototype.renderItemInfo = function () {
                 objectName: instance.item.title,
                 objectType: 2,
                 itemImages: instance.item.image,
-                itemPrice: 0,
+                itemPrice: instance.sku[0].price_vnd,
                 siteName: instance.website,
                 itemUrl: instance.item.url
             };
-            HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
+            HTMLUtil.post(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
                 HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
@@ -424,7 +425,7 @@ NHToolbar.prototype.renderItemInfo = function () {
                 siteName: instance.website,
                 itemUrl: instance.shop.url
             };
-            HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
+            HTMLUtil.post(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_favourite', { postData: data }, function (res) {
                 HTMLUtil.alert(res.msg, { parent: '#gocnshopLoveMsg', type: 'success' });
             });
         };
@@ -1240,62 +1241,36 @@ NHToolbar.prototype.addToCart = function () {
         };
 
         var t = null;
-        //HTMLUtil.post(gocnshop_config.apiDomain + "shoppingCart/add", data, function (response) {
-        //    if (response.code === 1) {
-        //        if (t !== null) {
-        //            clearTimeout(t);
-        //        }
-        //        t = setTimeout(function () {
-        //            HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\u00e3 \u0111\u01b0\u1ee3c th\u00eam v\u00e0o gi\u1ecf h\u00e0ng. ' +
-        //                '<a href="' + gocnshop_config.apiDomain + 'shoppingCart" target="_blank"><b>Xem gi\u1ecf h\u00e0ng &raquo;</b></a>.',
-        //                { parent: '#gocnshopOrderMsg', type: 'success' });
-        //        }, 250);
-        //    } else {
-        //        HTMLUtil.alert('Th\u00eam s\u1ea3n ph\u1ea9m v\u00e0o gi\u1ecf h\u00e0ng kh\u00f4ng th\u00e0nh c\u00f4ng: ' + response.message, {
-        //            parent: '#gocnshopOrderMsg', type: 'error'
-        //        });
-        //    }
-        //});
-
-        console.log(data);
-
         var custom_data = {
-            price_vnd: 1000000,
-            description: 'Lorem ipsum dolor sit amet',
-            short_description: 'Lorem',
-            website: 'https://demo3.netsoftsolution.net/gocnshop/',
-            id: 123456789,
-            title: 'Phat - New Product Name',
-            url: 'https://demo3.netsoftsolution.net/gocnshop/',
-            image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png',
-            ws_rule_number: 1,
-            min_quantity: 1,
-            weight: 50,
-            shop_id: 987654321,
-            shop_name: 'Phat - Shop Name',
-            shop_url: 'https://demo3.netsoftsolution.net/gocnshop/',
-            shop_address: 'Lorem ipsum dolor sit amet',
+            price_vnd: 0, //
+            description: '', //
+            short_description: '', //
+            website: this.getWebsite(),
+            id: data.id,
+            title: data.title,
+            url: data.url,
+            image: data.image,
+            ws_rule_number: data.ws_rule_number,
+            min_quantity: data.min_quantity,
+            //price_ranges
+            weight: data.weight,
+            shop_id: data.shop_id,
+            shop_name: data.shop_name,
+            shop_url: data.shop_url,
+            shop_address: data.shop_address,
             attributes: [],
-            list_sku: [{
-                name: 'Phat - New Product Name',
-                quantity: 1,
-                price: 300,
-                price_vnd: 1000000,
-                image: 'https://demo3.netsoftsolution.net/gocnshop/wp-content/uploads/2020/05/logo_2.png'
-            }]
+            list_sku: data.list_sku
         };
-
-        HTMLUtil.post(gocnshop_config.domain + 'wp-admin/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
-            comsole.log('KP');
-            console.log(res);
-            //if (res === 1) {
-            //htmlutil.alert('sản phẩm đã được thêm vào giỏ hàng. ' +
-            //    '<a href="' + 'http://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank"><b>xem giỏ hàng &raquo;</b></a>',
-            //    { parent: '#gocnshopordermsg', type: 'success' });
-            //} else {
-            //    htmlutil.alert('thêm sản phẩm vào giỏ hàng không thành công: ',
-            //        { parent: '#gocnshopordermsg', type: 'error' });
-            //}
+        console.log(custom_data);
+        HTMLUtil.post(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_add_product', custom_data, function (res) {
+            if (res.code === 1) {
+                HTMLUtil.alert('S\u1ea3n ph\u1ea9m \u0111\xe3 \u0111\u01b0\u1ee3c th\xeam v\xe0o gi\u1ecf h\xe0ng. ' +
+                    '<a href="' + gocnshop_config.domain + 'don-hang" target="_blank"><b>Xem gi\u1ecf h\xe0ng &raquo;</b></a>',
+                    { parent: '#gocnshopOrderMsg', type: 'success' });
+            } else {
+                HTMLUtil.alert('Th\xeam s\u1ea3n ph\u1ea9m v\xe0o gi\u1ecf h\xe0ng kh\xf4ng th\xe0nh c\xf4ng.',
+                    { parent: '#gocnshopOrderMsg', type: 'error' });
+            }
         });
 
     } else {
