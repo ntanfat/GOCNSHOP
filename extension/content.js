@@ -1354,7 +1354,7 @@ NHToolbar.prototype.rmbToVnd = function (input) {
             break;
     }
     commi = commi * 0.01;
-    var amount = (input + input * commi) * this.config.config.exchange_rate;
+    var amount = (input + input * commi) * this.config.config.exchange_rate_cn;
 
     amount = Math.ceil(amount);
     if (amount % 100 !== 0) {
