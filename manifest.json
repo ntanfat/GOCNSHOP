@@ -5,7 +5,7 @@
       "24": "assets/images/icons/24.png",
       "32": "assets/images/icons/32.png"
     },
-    "default_title": "GOCNSHOP"
+    "default_title": "GOCNSHOP TOOLBOX"
   },
   "content_scripts": [
     {
@@ -28,7 +28,7 @@
     "128": "assets/images/icons/128.png"
   },
   "manifest_version": 2,
-  "name": "GOCNSHOP",
+  "name": "GOCNSHOP TOOLBOX",
   "permissions": [
     "http://*.1688.com/*",
     "https://*.1688.com/*",
