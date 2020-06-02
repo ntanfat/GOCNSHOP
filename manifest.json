@@ -21,7 +21,7 @@
   "web_accessible_resources": [
     "assets/js/app.js"
   ],
-  "description": "GOCNSHOP",
+  "description": "This chrome extension is used to help user who want to buy item from taobao/tmall/1688 easier and faster.",
   "icons": {
     "16": "assets/images/icons/16.png",
     "48": "assets/images/icons/48.png",
