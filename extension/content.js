@@ -1,7 +1,7 @@
 var gocnshop_config = {
     apiDomain: '//nhaphangtrungquoc.vn/',
-    domain: 'https://demo3.netsoftsolution.net/gocnshop/',
-    path: 'extension/'
+    domain: 'https://www.gocnshop.com/',
+    path: 'extension/prod/'
 };
 
 var HTMLUtil = {
@@ -194,8 +194,6 @@ function NHToolbar() {
     HTMLUtil.get(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_config', function (response) {
         var res = JSON.parse(response);
         instance.config = res;
-        console.log('');
-        console.log(instance.config);
         instance.hostname = instance.getHostName();
         instance.website = instance.getWebsite();
         instance.shop = instance.getShopInfo();
@@ -203,6 +201,8 @@ function NHToolbar() {
         instance.sku = null;
         instance.selectedQuantity = 0;
         instance.subtotal = 0;
+        instance.domestic_fee = 0;
+        instance.order_fee = 0;
         instance.run();
     });
 }
@@ -357,7 +357,6 @@ NHToolbar.prototype.render = function () {
             idxTimeout = setTimeout(function () {
                 HTMLUtil.get(gocnshop_config.domain + 'admincp/admin-ajax.php?action=gocnshop_search&term=' + encodeURIComponent(keyword), function (res) {
                     var words = JSON.parse(res);
-                    console.log(words);
                     instance.setSidebarState({ searchResult: words });
                 });
             }, 500);
@@ -494,6 +493,11 @@ NHToolbar.prototype.renderItemInfoTaobao = function () {
         var instance = this;
         instance.timeoutResourceId = null;
         var jskuAElements = HTMLUtil.selectAll('#J_SKU a');
+
+        if (jskuAElements.length === 0) {
+            jskuAElements = HTMLUtil.selectAll('.J_TSaleProp li a');
+        }
+
         if (jskuAElements.length > 0) {
             for (var i = 0; i < jskuAElements.length; i++) {
                 jskuAElements[i].onclick = function () {
@@ -611,7 +615,7 @@ NHToolbar.prototype.getItemInfoHTML = function (item) {
 
     var htmlShopInfo = '';
     if (this.shop && this.shop.name) {
-        htmlShopInfo = '<tr><td colspan="2">Shop: <a href="' + this.shop.url + '" target="_blank">' + this.shop.name + '</a></td></tr>' +
+        htmlShopInfo = '<tr><td colspan="2">Shop: <a href="' + this.shop.url + '" target="_blank">' + this.shop.name + '</a><span style="float: right">T\u1ec9 gi\xe1: <span class="text-red" style="font-size: 15px">' + this.config.config.exchange_rate_cn + '</span></span></td></tr>' +
             '<tr><td colspan="2"><div id="gocnshopLoveMsg"></div><a href="' + this.shop.url + '" target="_blank" class="gocnshop-love-item gocnshop-go-to-shop">S\u1ea3n ph\u1ea9m c\u00f9ng shop</a> ' +
             '<a href="javascript:void(0)" id="gocnshopBtnLoveShop" class="gocnshop-love-item gocnshop-love-shop">Y\u00eau th\u00edch shop</a> <a href="javascript:void(0)" id="gocnshopBtnLoveItem" class="gocnshop-love-item">Y\u00eau th\u00edch s\u1ea3n ph\u1ea9m</a>' +
             '</td></tr>';
@@ -929,7 +933,15 @@ NHToolbar.prototype.priceTag = {
 NHToolbar.prototype.updateSelectedSKU1688 = function () {
     this.selectedQuantity = 0;
     this.subtotal = 0;
-    // console.log("----");
+
+    //Get domestic_fee
+    var el = document.querySelectorAll('div.cost-entries-type em.value');
+    if (typeof (el) != 'undefined' && el != null) {
+        this.domestic_fee = parseInt(el[0].innerText) * this.config.config.exchange_rate_cn;
+    } else {
+        this.domestic_fee = this.config.config.domestic_fee_1688;
+    }
+
     if (iDetailConfig.isSKUOffer === "true") {
         if (iDetailData.sku !== undefined && iDetailData.sku.skuMap !== undefined) {
             var selectedSku = [];
@@ -943,7 +955,6 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
                     amount = parseInt(s.amount);
                 }
                 if (amount !== 0) {
-                    // console.log(i + " -> " + amount);
                     var si = {
                         "name": i,
                         "quantity": amount
@@ -1002,7 +1013,6 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
                     }
                 }
                 if (tmpPrice > 0) {
-                    // console.log('Tmp Price: ' + tmpPrice);
                     this.subtotal = 0;
                     for (i = 0; i < selectedSku.length; i++) {
                         selectedSku[i].price = tmpPrice;
@@ -1015,6 +1025,11 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             this.sku = selectedSku;
 
             HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+
+            if (this.subtotal !== 0) {
+                this.subtotal += this.domestic_fee;
+            }
+
             HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
         }
     } else {
@@ -1035,7 +1050,8 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
                 "name": "",
                 "quantity": quantity,
                 "price": price,
-                "price_vnd": this.rmbToVnd(price)
+                "price_vnd": this.rmbToVnd(price),
+                "image": ""
             };
             this.sku = [];
             this.sku.push(si);
@@ -1043,6 +1059,11 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
             this.subtotal += si.price_vnd * quantity;
 
             HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+
+            if (this.subtotal !== 0) {
+                this.subtotal += this.domestic_fee;
+            }
+
             HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
         }
     }
@@ -1051,6 +1072,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
 NHToolbar.prototype.updateSelectedSKUTaobao = function () {
     this.selectedQuantity = parseInt(HTMLUtil.select('#J_IptAmount').value);
     this.subtotal = 0;
+    this.domestic_fee = this.config.config.domestic_fee_taobao;
 
     var price = 0;
     var ele = null;
@@ -1111,7 +1133,8 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
             "name": "",
             "quantity": this.selectedQuantity,
             "price": price,
-            "price_vnd": priceVnd
+            "price_vnd": priceVnd,
+            "image": ""
         });
     }
 
@@ -1123,6 +1146,11 @@ NHToolbar.prototype.updateSelectedSKUTaobao = function () {
     }
 
     HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+
+    if (this.subtotal !== 0) {
+        this.subtotal += this.domestic_fee;
+    }
+
     HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
 };
 
@@ -1133,6 +1161,7 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
 
     this.selectedQuantity = parseInt(HTMLUtil.select('.tb-text.mui-amount-input').value);
     this.subtotal = 0;
+    this.domestic_fee = this.config.config.domestic_fee_tmall;
 
     var price = 0;
 
@@ -1184,7 +1213,8 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
             "name": "",
             "quantity": this.selectedQuantity,
             "price": price,
-            "price_vnd": priceVnd
+            "price_vnd": priceVnd,
+            "image": ""
         });
     }
 
@@ -1195,6 +1225,11 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
     }
 
     HTMLUtil.select('#gocnshopSelectedQuantity').innerHTML = HTMLUtil.formatMoney(this.selectedQuantity);
+
+    if (this.subtotal !== 0) {
+        this.subtotal += this.domestic_fee;
+    }
+
     HTMLUtil.select('#gocnshopSelectedSubtotal').innerHTML = HTMLUtil.formatMoney(this.subtotal) + '\u0111';
 };
 
@@ -1241,7 +1276,10 @@ NHToolbar.prototype.addToCart = function () {
         };
 
         var t = null;
+
         var custom_data = {
+            domestic_fee: this.domestic_fee,
+            order_fee: this.order_fee,
             price_vnd: 0, //
             description: '', //
             short_description: '', //
@@ -1272,7 +1310,6 @@ NHToolbar.prototype.addToCart = function () {
                     { parent: '#gocnshopOrderMsg', type: 'error' });
             }
         });
-
     } else {
         if (typeof this.sku === 'undefined' || this.sku === null || this.sku.length === 0) {
             HTMLUtil.alert('Qu\u00fd kh\u00e1ch vui l\u00f2ng ch\u1ecdn th\u00f4ng s\u1ed1 s\u1ea3n ph\u1ea9m mu\u1ed1n \u0111\u1eb7t mua.', { parent: '#gocnshopOrderMsg', type: 'error' });
@@ -1339,29 +1376,29 @@ NHToolbar.prototype.isItemDetailPage = function () {
     return false;
 };
 
-NHToolbar.prototype.rmbToVnd = function (input) {
-    var commi = 0;
+NHToolbar.prototype.rmbToVnd = function (price_cn) {
+    var exchange_rate = this.config.config.exchange_rate_cn;
+    var service_cost = 0;
     switch (this.website) {
         case '1688.com':
-            commi = this.config.config.service_cost_1688;
+            service_cost = this.config.config.service_cost_1688;
             break;
         case 'taobao.com':
-            commi = this.config.config.service_cost_taobao;
+            service_cost = this.config.config.service_cost_taobao;
             break;
         case 'tmall.com':
         case 'tmall.tk':
-            commi = this.config.config.service_cost_tmall;
+            service_cost = this.config.config.service_cost_tmall;
             break;
     }
-    //commi = commi * 0.01;
-    //var amount = (input + input * commi) * this.config.config.exchange_rate_cn;
-    var amount = (input + commi) * this.config.config.exchange_rate_cn;
+    this.order_fee = (service_cost * price_cn / 100) * exchange_rate;
+    var result = price_cn * exchange_rate;
 
-    amount = Math.ceil(amount);
-    if (amount % 100 !== 0) {
-        amount = amount + (100 - amount % 100);
+    result = Math.ceil(result);
+    if (result % 100 !== 0) {
+        result = result + (100 - result % 100);
     }
-    return amount;
+    return result;
 };
 
 var nhtb = new NHToolbar();

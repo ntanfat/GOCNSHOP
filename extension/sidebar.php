@@ -13,12 +13,12 @@
     <div class="gocnshop-sidebar">
         <div class="gocnshop-sidebar-icons">
             <ul>
-                <li><a href="https://demo3.netsoftsolution.net/gocnshop/" target="_blank" class="nh-icon nh-logo" title="GOCNSHOP"></a></li>
+                <li><a href="https://www.gocnshop.com/" target="_blank" class="nh-icon nh-logo" title="GOCNSHOP"></a></li>
                 <li><a href="javascript:void(0);" class="nh-icon nh-search nh-sidebar-btn" data-screen="search" title="Tìm kiếm sản phẩm"></a></li>
-                <li><a href="https://demo3.netsoftsolution.net/gocnshop/don-hang" target="_blank" class="nh-icon nh-cart" title="Giỏ hàng"></a></li>
-                <li><a href="https://demo3.netsoftsolution.net/gocnshop/huong-dan-dat-hang" target="_blank" class="nh-icon nh-help" title="Hướng dẫn đặt hàng"></a></li>
+                <li><a href="https://www.gocnshop.com/don-hang" target="_blank" class="nh-icon nh-cart" title="Giỏ hàng"></a></li>
+                <li><a href="https://www.gocnshop.com/huong-dan-dat-hang" target="_blank" class="nh-icon nh-help" title="Hướng dẫn đặt hàng"></a></li>
                 <li><a href="javascript:void(0);" class="nh-icon nh-contact nh-sidebar-btn" data-screen="contact" title="Liên hệ" target="parent"></a></li>
-                <li><a href="https://demo3.netsoftsolution.net/gocnshop/" class="nh-icon nh-back" title="Trở về" target="_blank"></a></li>
+                <li><a href="https://www.gocnshop.com/" class="nh-icon nh-back" title="Trở về" target="_blank"></a></li>
             </ul>
         </div>
         <div class="gocnshop-sidebar-content">
@@ -33,12 +33,12 @@
                         <li class="nh-pp510"><span id="nhUsername"></span></li>
                         <li class="nh-pp510">Số dư: <span id="nhUserWalletBalance" style="color:#c00;font-weight:bold;"></span></li>
                         <li class="nh-pp510"><b>Tài khoản cá nhân</b></li>
-                        <li><a href="https://demo3.netsoftsolution.net/gocnshop/thong-tin-tai-khoan/sua-tai-khoan" target="_blank"><i class="nh-menu-icon nh-icon-change-password"></i>Đổi mật khẩu</a></li>
-                        <li><a href="https://demo3.netsoftsolution.net/gocnshop/thong-tin-tai-khoan/sua-dia-chi" target="_blank"><i class="nh-menu-icon nh-icon-address-book"></i>Sổ địa chỉ</a></li>
+                        <li><a href="https://www.gocnshop.com/thong-tin-tai-khoan/sua-tai-khoan" target="_blank"><i class="nh-menu-icon nh-icon-change-password"></i>Đổi mật khẩu</a></li>
+                        <li><a href="https://www.gocnshop.com/thong-tin-tai-khoan/sua-dia-chi" target="_blank"><i class="nh-menu-icon nh-icon-address-book"></i>Sổ địa chỉ</a></li>
                         <li class="nh-pp510"><b>Ví điện tử</b></li>
-                        <li><a href="https://demo3.netsoftsolution.net/gocnshop/thong-tin-tai-khoan/transactions-history" target="_blank"><i class="nh-menu-icon nh-icon-history"></i>Lịch sử giao dịch</a></li>
-                        <li><a href="https://demo3.netsoftsolution.net/gocnshop/thong-tin-tai-khoan/don-hang" target="_blank"><i class="nh-menu-icon nh-icon-order-list"></i>Danh sách đơn hàng</a></li>
-                        <li><a href="https://demo3.netsoftsolution.net/gocnshop/thong-tin-tai-khoan/make-a-deposit" target="_blank"><i class="nh-menu-icon nh-icon-change-password"></i>Mật khẩu ví</a></li>
+                        <li><a href="https://www.gocnshop.com/thong-tin-tai-khoan/transactions-history" target="_blank"><i class="nh-menu-icon nh-icon-history"></i>Lịch sử giao dịch</a></li>
+                        <li><a href="https://www.gocnshop.com/thong-tin-tai-khoan/don-hang" target="_blank"><i class="nh-menu-icon nh-icon-order-list"></i>Danh sách đơn hàng</a></li>
+                        <li><a href="https://www.gocnshop.com/thong-tin-tai-khoan/make-a-deposit" target="_blank"><i class="nh-menu-icon nh-icon-change-password"></i>Mật khẩu ví</a></li>
                         <li class="nh-logout"><a href="javascript:void(0)" id="nhBtnLogout"><i class="nh-menu-icon nh-icon-logout"></i>Thoát</a></li>
                     </ul>
                 </div>
@@ -47,13 +47,13 @@
                 <div class="gocnshop-sidebar-form">
                     <div class="gocnshop-row-input gocnshop-select-website">
                         <a href="javascript:void(0)" data-website="taobao.com" class="nh-selected">
-                            <img src="https://demo3.netsoftsolution.net/gocnshop/images/logo-taobao-sm.png">
+                            <img src="https://www.gocnshop.com/images/logo-taobao-sm.png">
                         </a>
                         <a href="javascript:void(0)" data-website="tmall.com">
-                            <img src="https://demo3.netsoftsolution.net/gocnshop/images/logo-tmall-sm.png">
+                            <img src="https://www.gocnshop.com/images/logo-tmall-sm.png">
                         </a>
                         <a href="javascript:void(0)" data-website="1688.com">
-                            <img src="https://demo3.netsoftsolution.net/gocnshop/images/logo-1688-sm.png">
+                            <img src="https://www.gocnshop.com/images/logo-1688-sm.png">
                         </a>
                     </div>
                     <div class="gocnshop-row-input clearboth">
