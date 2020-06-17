@@ -39,5 +39,5 @@
     "http://*.tmall.hk/*",
     "https://*.tmall.hk/*"
   ],
-  "version": "0.1"
+  "version": "0.2"
 }

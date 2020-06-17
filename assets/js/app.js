@@ -1,5 +1,5 @@
-var domain = 'https://demo3.netsoftsolution.net/gocnshop/';
-var path = 'extension/';
+var domain = 'https://www.gocnshop.com/';
+var path = 'extension/prod/';
 var version = '?v=' + new Date().getTime();
 
 //Append CSS
