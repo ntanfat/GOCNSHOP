@@ -135,7 +135,11 @@ var HTMLUtil = {
             case "tmall.com":
             case "tmall.hk":
             case "tmall":
-                url = 'https://detail.tmall.com/item.htm?id=' + itemId;
+                if (window.location.hostname.indexOf('world.tmall.com') !== 0) {
+                    url = 'https://world.tmall.com/item/' + itemId + '.htm';
+                } else {
+                    url = 'https://detail.tmall.com/item.htm?id=' + itemId;
+                }
                 break;
             case "1688.com":
             case "1688":
@@ -903,14 +907,28 @@ NHToolbar.prototype.getShopInfo = function () {
         }
     } else if (this.website === "tmall.com" || this.website === "tmall.hk") {
         if (g_config !== undefined && g_config !== null) {
+            console.log(g_config);
             if (g_config.shopId !== undefined && g_config.shopId !== null) {
                 shop.name = decodeURIComponent(g_config.sellerNickName);
-                shop.url = 'https:' + g_config.shopUrl;
-                shop.id = shop.url.replace("http://", "").replace("https://", "").split("/")[0].split('.')[0];
+                if (shop.name === 'undefined' || shop.name === '') {
+                    shop.name = g_config.pageId;
+                }
+                if (g_config.shopUrl !== '') {
+                    shop.url = 'https:' + g_config.shopUrl;
+                }
+                if (g_config.shopId !== '') {
+                    shop.id = g_config.shopId;
+                }
             }
         }
-        if (shop.url) {
-            shop.url = 'https://' + shop.id + '.tmall.com/search.htm';
+        if (shop.id === '') {
+            shop.id = window.location.href.replace("http://", "").replace("https://", "").split("/")[0].split('.')[0];
+        }
+        if (shop.url === '') {
+            shop.url = 'https://' + shop.name + '.tmall.com';
+            // if (!isNaN(shop.id)) {
+            //     shop.url = 'https://' + shop.id + '.tmall.com/search.htm';
+            // }
         }
         var addrInput = HTMLUtil.select('input[name=region]');
         if (typeof addrInput !== 'undefined' && addrInput !== null) {
@@ -920,7 +938,7 @@ NHToolbar.prototype.getShopInfo = function () {
             }
         }
     }
-
+    console.log(shop);
     return shop;
 };
 
@@ -1179,12 +1197,13 @@ NHToolbar.prototype.updateSelectedSKUTmall = function () {
     // Selected SKU
     this.sku = [];
     var elementJSKU = HTMLUtil.selectAll('.tb-sku .tb-prop.tm-sale-prop');
+    var elementJSKU_services = HTMLUtil.selectAll('.tb-sku .tb-prop.tm-services');
 
-    if (elementJSKU !== null && elementJSKU.length > 0) {
+    if (elementJSKU !== null && (elementJSKU.length + elementJSKU_services.length) > 0) {
         var selectedProperties = HTMLUtil.selectAll('.tb-sku .tb-prop .tb-selected a');
         if (selectedProperties !== null
             && selectedProperties !== undefined
-            && selectedProperties.length === elementJSKU.length) {
+            && selectedProperties.length === (elementJSKU.length + elementJSKU_services.length)) {
 
             var tmpSkuName = [];
             var img = "";
