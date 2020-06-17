@@ -936,7 +936,7 @@ NHToolbar.prototype.updateSelectedSKU1688 = function () {
 
     //Get domestic_fee
     var el = document.querySelectorAll('div.cost-entries-type em.value');
-    if (typeof (el) != 'undefined' && el != null) {
+    if (typeof (el) !== 'undefined' && el !== null && el.length !== 0) {
         this.domestic_fee = parseInt(el[0].innerText) * this.config.config.exchange_rate_cn;
     } else {
         this.domestic_fee = this.config.config.domestic_fee_1688;
